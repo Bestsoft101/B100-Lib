@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "b100lib",
+	"version": "${version}",
+	"name": "B100 Lib",
+	"description": "Library for my mods, contains GUI, config, and translation systems. Currently used for my Borderless Fullscreen mod",
+	"authors": [
+		"Bestsoft100"
+	],
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"b100.lib.B100Lib"
+		],
+		"client": [
+			"b100.lib.client.B100LibClient"
+		],
+		"modmenu": [
+			"b100.lib.client.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"b100lib.mixins.json",
+		{
+			"config": "b100lib.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.14",
+		"minecraft": ">=1.21 <=1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"badges": [
+				"library"
+			]
+		}
+	}
+}

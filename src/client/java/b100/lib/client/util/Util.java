@@ -1,0 +1,42 @@
+package b100.lib.client.util;
+
+import java.util.List;
+import java.util.function.Function;
+
+public class Util {
+	
+	public static <E> E findFirstElement(List<E> list, boolean backwards, Function<E, Boolean> condition) {
+		int start, dir;
+		if(backwards) {
+			start = list.size() - 1;
+			dir = -1;
+		}else {
+			start = 0;
+			dir = 1;
+		}
+		for(int i = start; i >= 0 && i < list.size(); i += dir) {
+			E element = list.get(i);
+			if(condition.apply(element)) {
+				return element;
+			}
+		}
+		return null;
+	}
+	
+	public static <E> void reverseList(List<E> list) {
+		int size = list.size();
+		
+		for(int i = size - 1; i >= 0; i--) {
+			list.add(list.remove(i));
+		}
+	}
+	
+	public static <E> void addArrayContentToList(List<E> list, E[] array) {
+		for(E e : array) {
+			if(e != null) {
+				list.add(e);
+			}
+		}
+	}
+
+}
