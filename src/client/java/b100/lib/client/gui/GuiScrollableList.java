@@ -34,7 +34,7 @@ public class GuiScrollableList extends GuiContainer {
 		
 		final int separatorSize = 2;
 		
-		utils.drawTexture(textures.menuListBackground, posX, posY + separatorSize, 0, 0, this.width, this.height - 2 * separatorSize, 32, 32);
+		utils.drawTexture(textures.menuListBackground, posX, posY + separatorSize, 0, (int) scrollAmount, this.width, this.height - 2 * separatorSize, 32, 32);
 		utils.drawTexture(textures.headerSeparator, posX, posY, 0, 0, this.width, separatorSize, 32, separatorSize);
 		utils.drawTexture(textures.footerSeparator, posX, posY + this.height - separatorSize, 0, 0, this.width, 2, 32, separatorSize);
 		
