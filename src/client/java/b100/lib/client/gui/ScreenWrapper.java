@@ -13,7 +13,13 @@ public class ScreenWrapper extends Screen {
 	
 	private GuiUtils utils = GuiUtils.instance;
 	private boolean screenOpened = true;
-	private boolean backgroundEnabled = true;
+	private boolean enableBackground = true;
+	
+	private boolean enableBackgroundScissor = false;
+	private int backgroundScissorX;
+	private int backgroundScissorY;
+	private int backgroundScissorWidth;
+	private int backgroundScissorHeight;
 	
 	public ScreenWrapper(GuiScreen screen) {
 		super(null);
@@ -93,15 +99,36 @@ public class ScreenWrapper extends Screen {
 		return Text.of("");
 	}
 	
-	public void setBackgroundEnabled(boolean backgroundEnabled) {
-		this.backgroundEnabled = backgroundEnabled;
+	public void setBackgroundEnabled(boolean enableBackground) {
+		this.enableBackground = enableBackground;
 	}
 	
 	@Override
 	public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-		if(backgroundEnabled || client.world == null) {
+		if(enableBackground || client.world == null) {
+			boolean scissor = false;
+			if(enableBackgroundScissor) {
+				utils.drawContext.enableScissor(backgroundScissorX, backgroundScissorY, backgroundScissorX + backgroundScissorWidth, backgroundScissorY + backgroundScissorHeight);
+				scissor = true;
+			}
+			
 			super.renderBackground(context, mouseX, mouseY, delta);
+			
+			if(scissor) {
+				utils.drawContext.disableScissor();
+			}
 		}
+	}
+	
+	public void setBackgroundScissorEnabled(boolean enableBackgroundScissor) {
+		this.enableBackgroundScissor = enableBackgroundScissor;
+	}
+	
+	public void setBackgroundScissorArea(int x, int y, int w, int h) {
+		backgroundScissorX = x;
+		backgroundScissorY = y;
+		backgroundScissorWidth = w;
+		backgroundScissorHeight = h;
 	}
 	
 }

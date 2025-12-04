@@ -192,5 +192,17 @@ public abstract class GuiScreen extends GuiContainer implements IScreen, FocusLi
 	public void setBackgroundEnabled(boolean backgroundEnabled) {
 		wrapper.setBackgroundEnabled(backgroundEnabled);
 	}
+	
+	public void setBackgroundScissorEnabled(boolean enableBackgroundScissor) {
+		wrapper.setBackgroundScissorEnabled(enableBackgroundScissor);
+	}
+	
+	public void setBackgroundScissorArea(int x, int y, int w, int h) {
+		wrapper.setBackgroundScissorArea(x, y, w, h);
+	}
+	
+	public void setBackgroundScissorArea(GuiElement element) {
+		setBackgroundScissorArea(element.posX, element.posY, element.width, element.height);
+	}
 
 }
