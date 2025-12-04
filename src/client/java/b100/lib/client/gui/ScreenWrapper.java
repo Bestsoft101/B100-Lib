@@ -13,6 +13,7 @@ public class ScreenWrapper extends Screen {
 	
 	private GuiUtils utils = GuiUtils.instance;
 	private boolean screenOpened = true;
+	private boolean backgroundEnabled = true;
 	
 	public ScreenWrapper(GuiScreen screen) {
 		super(null);
@@ -90,6 +91,17 @@ public class ScreenWrapper extends Screen {
 	@Override
 	public Text getTitle() {
 		return Text.of("");
+	}
+	
+	public void setBackgroundEnabled(boolean backgroundEnabled) {
+		this.backgroundEnabled = backgroundEnabled;
+	}
+	
+	@Override
+	public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+		if(backgroundEnabled || client.world == null) {
+			super.renderBackground(context, mouseX, mouseY, delta);
+		}
 	}
 	
 }

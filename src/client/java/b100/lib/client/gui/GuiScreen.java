@@ -188,5 +188,9 @@ public abstract class GuiScreen extends GuiContainer implements IScreen, FocusLi
 	public void onScreenOpened() {
 		screenListeners.forEach((listener) -> listener.onScreenOpened(this));
 	}
+	
+	public void setBackgroundEnabled(boolean backgroundEnabled) {
+		wrapper.setBackgroundEnabled(backgroundEnabled);
+	}
 
 }
