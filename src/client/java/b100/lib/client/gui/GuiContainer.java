@@ -52,6 +52,14 @@ public class GuiContainer extends GuiElement implements FocusListener {
 	}
 	
 	@Override
+	public void charEvent(char c, int modifiers) {
+		for(int i=0; i < elements.size(); i++) {
+			elements.get(i).charEvent(c, modifiers);
+		}
+		super.charEvent(c, modifiers);
+	}
+	
+	@Override
 	public void onResize() {
 		for(int i=0; i < elements.size(); i++) {
 			elements.get(i).onResize();

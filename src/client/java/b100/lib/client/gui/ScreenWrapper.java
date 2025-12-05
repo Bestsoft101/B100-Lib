@@ -85,6 +85,12 @@ public class ScreenWrapper extends Screen {
 	}
 	
 	@Override
+	public boolean charTyped(char chr, int modifiers) {
+		screen.charEvent(chr, modifiers);
+		return false;
+	}
+	
+	@Override
 	protected void addScreenNarrations(NarrationMessageBuilder messageBuilder) {
 		// TODO
 	}
@@ -107,7 +113,7 @@ public class ScreenWrapper extends Screen {
 	public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
 		if(enableBackground || client.world == null) {
 			boolean scissor = false;
-			if(enableBackgroundScissor) {
+			if(enableBackgroundScissor && client.world != null) {
 				utils.drawContext.enableScissor(backgroundScissorX, backgroundScissorY, backgroundScissorX + backgroundScissorWidth, backgroundScissorY + backgroundScissorHeight);
 				scissor = true;
 			}

@@ -7,35 +7,31 @@ import b100.lib.client.gui.GuiScrollableList.ListLayout.Align;
 import b100.lib.client.mixin.IScreen;
 import net.minecraft.text.Text;
 
-public class TestScreen extends GuiScrollListScreen {
+public class ButtonTestScreen extends GuiScrollListScreen {
 
 	public GuiButton doneButton;
 	
-	public TestScreen(IScreen parentScreen) {
+	public ButtonTestScreen(IScreen parentScreen) {
 		super(parentScreen);
 	}
 	
 	@Override
 	protected void onInit() {
 		super.onInit();
-		
-		title = Text.of("GUI Demo");
+
+		title = Text.of("Buttons");
 		
 		doneButton = add(new GuiButton(this, Text.of("Done")));
 		doneButton.addActionListener((e) -> back());
 		
 		scrollList.layout = new ListLayout().setInnerPadding(4).setOuterPadding(8).setAlign(Align.CENTER);
 	}
-	
+
 	@Override
 	public void initScrollElements() {
-		GuiButton button1 = new GuiButton(this, Text.of("Buttons"));
-		button1.addActionListener((e) -> utils.setScreen(new ButtonTestScreen(this)));
-		scrollList.add(button1);
-		
-		GuiButton button2 = new GuiButton(this, Text.of("Text Fields"));
-		button2.addActionListener((e) -> utils.setScreen(new TextFieldTestScreen(this)));
-		scrollList.add(button2);
+		for(int i=0; i < 16; i++) {
+			scrollList.add(new GuiButton(this, Text.of("Button " + (i + 1))));
+		}
 	}
 	
 	@Override

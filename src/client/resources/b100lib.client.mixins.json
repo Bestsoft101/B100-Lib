@@ -4,7 +4,8 @@
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 		"IScreen",
-		"LanguageManagerMixin"
+		"LanguageManagerMixin",
+		"TextFieldWidgetMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

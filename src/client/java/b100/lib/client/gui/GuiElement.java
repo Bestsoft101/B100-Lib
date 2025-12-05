@@ -25,6 +25,10 @@ public abstract class GuiElement {
 		return false;
 	}
 	
+	public void charEvent(char c, int modifiers) {
+		
+	}
+	
 	public void onResize() {
 		
 	}
