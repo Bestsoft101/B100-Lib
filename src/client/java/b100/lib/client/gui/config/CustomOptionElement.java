@@ -9,7 +9,7 @@ import b100.lib.client.gui.GuiElement;
 import b100.lib.client.gui.GuiScreen;
 import b100.lib.client.gui.ListenerList;
 import b100.lib.client.gui.ScreenListener;
-import b100.lib.client.translate.Translate;
+import b100.lib.client.translate.Translations;
 import net.minecraft.text.Text;
 
 public class CustomOptionElement<E> extends GuiContainer implements ActionListener, ScreenListener {
@@ -25,10 +25,10 @@ public class CustomOptionElement<E> extends GuiContainer implements ActionListen
 	
 	public CustomOptionElement(GuiScreen screen, String key, E value) {
 		this.screen = screen;
-		this.name = Translate.translate(key);
+		this.name = Translations.INSTANCE.asText(key);
 		this.value = value;
 
-		String tooltipText = Translate.translateIfExists(key + ".tooltip");
+		String tooltipText = Translations.INSTANCE.asStringOrNull(key + ".tooltip");
 		if(tooltipText != null) {
 			this.tooltipText = Text.of(tooltipText);
 		}

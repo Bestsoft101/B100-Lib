@@ -1,15 +1,10 @@
 package b100.lib.client.test;
 
+import b100.lib.client.B100LibClient;
 import b100.lib.client.gui.GuiButton;
-import b100.lib.client.gui.GuiScrollListScreen;
-import b100.lib.client.gui.GuiScrollableList.ListLayout;
-import b100.lib.client.gui.GuiScrollableList.ListLayout.Align;
 import b100.lib.client.mixin.IScreen;
-import net.minecraft.text.Text;
 
-public class TestScreen extends GuiScrollListScreen {
-
-	public GuiButton doneButton;
+class TestScreen extends BasicScrollableScreen {
 	
 	public TestScreen(IScreen parentScreen) {
 		super(parentScreen);
@@ -19,29 +14,24 @@ public class TestScreen extends GuiScrollListScreen {
 	protected void onInit() {
 		super.onInit();
 		
-		title = Text.of("GUI Demo");
-		
-		doneButton = add(new GuiButton(this, Text.of("Done")));
-		doneButton.addActionListener((e) -> back());
-		
-		scrollList.layout = new ListLayout().setInnerPadding(4).setOuterPadding(8).setAlign(Align.CENTER);
+		title = B100LibClient.trans.asText("screen.gui_demo");
 	}
 	
 	@Override
 	public void initScrollElements() {
-		GuiButton button1 = new GuiButton(this, Text.of("Buttons"));
-		button1.addActionListener((e) -> utils.setScreen(new ButtonTestScreen(this)));
-		scrollList.add(button1);
+		GuiButton button;
 		
-		GuiButton button2 = new GuiButton(this, Text.of("Text Fields"));
-		button2.addActionListener((e) -> utils.setScreen(new TextFieldTestScreen(this)));
-		scrollList.add(button2);
-	}
-	
-	@Override
-	public void onResize() {
-		super.onResize();
-		setFooterButtonPosition(doneButton);
+		button = new GuiButton(this, B100LibClient.trans.asText("screen.buttons"));
+		button.addActionListener((e) -> utils.setScreen(new ButtonTestScreen(this)));
+		scrollList.add(button);
+		
+		button = new GuiButton(this, B100LibClient.trans.asText("screen.textfields"));
+		button.addActionListener((e) -> utils.setScreen(new TextFieldTestScreen(this)));
+		scrollList.add(button);
+		
+		button = new GuiButton(this, B100LibClient.trans.asText("screen.translations"));
+		button.addActionListener((e) -> utils.setScreen(new SelectTranslationFileScreen(this)));
+		scrollList.add(button);
 	}
 	
 }

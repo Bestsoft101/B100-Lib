@@ -88,6 +88,7 @@ public class ConfigUtil {
 		}
 	}
 	
+	@FunctionalInterface
 	public static interface ConfigParser {
 		
 		public void parse(String key, String value);

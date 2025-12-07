@@ -3,16 +3,16 @@ package b100.lib.client.gui.config;
 import java.util.HashSet;
 import java.util.Set;
 
+import b100.lib.client.B100LibClient;
 import b100.lib.client.gui.GuiButton;
 import b100.lib.client.gui.GuiScreen;
-import b100.lib.client.translate.Translate;
 
 public class SaveConfigButton extends GuiButton implements ConfigElementListener {
 
 	private final Set<ConfigElement<?>> changedConfigElements = new HashSet<>();
 	
 	public SaveConfigButton(GuiScreen screen) {
-		super(screen, Translate.translate("button.saveAndQuit"));
+		super(screen, B100LibClient.trans.asText("button.saveAndQuit"));
 		
 		setActive(false);
 	}

@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import b100.lib.client.B100LibClient;
 import b100.lib.client.gui.ActionListener;
 import b100.lib.client.gui.GuiButton;
 import b100.lib.client.gui.GuiContainer;
 import b100.lib.client.gui.GuiElement;
 import b100.lib.client.gui.GuiScreen;
 import b100.lib.client.gui.ScreenListener;
-import b100.lib.client.translate.Translate;
+import b100.lib.client.translate.Translations;
 import net.minecraft.text.Text;
 
 public class BooleanToggleElement extends GuiContainer implements ActionListener, ConfigElement<Boolean>, ScreenListener {
@@ -25,13 +26,13 @@ public class BooleanToggleElement extends GuiContainer implements ActionListener
 	
 	private final List<ConfigElementListener> configElementListeners = new ArrayList<>();
 	private final List<Consumer<Boolean>> saveConsumers = new ArrayList<>();
-	
+
 	public BooleanToggleElement(GuiScreen screen, String key, boolean value) {
 		this.screen = screen;
-		this.name = Translate.translate(key);
+		this.name = Translations.INSTANCE.asText(key);
 		this.value = initialValue = defaultValue = value;
 		
-		String tooltipText = Translate.translateIfExists(key + ".tooltip");
+		String tooltipText = Translations.INSTANCE.asStringOrNull(key + ".tooltip");
 		if(tooltipText != null) {
 			this.tooltipText = Text.of(tooltipText);
 		}
@@ -79,7 +80,7 @@ public class BooleanToggleElement extends GuiContainer implements ActionListener
 	}
 	
 	public void update() {
-		button.text = Text.of(value ? "\247a" + Translate.translateToString("value.yes") : "\247c" + Translate.translateToString("value.no"));
+		button.text = Text.of(value ? "\247a" + B100LibClient.trans.asString("value.yes") : "\247c" + B100LibClient.trans.asString("value.no"));
 	}
 	
 	public boolean getValue() {

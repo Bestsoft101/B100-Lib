@@ -1,18 +1,13 @@
 package b100.lib.client.test;
 
 import b100.lib.Print;
-import b100.lib.client.gui.GuiButton;
-import b100.lib.client.gui.GuiScrollListScreen;
-import b100.lib.client.gui.GuiScrollableList.ListLayout;
-import b100.lib.client.gui.GuiScrollableList.ListLayout.Align;
+import b100.lib.client.B100LibClient;
 import b100.lib.client.gui.GuiTextField;
 import b100.lib.client.mixin.IScreen;
 import net.minecraft.text.Text;
 
-public class TextFieldTestScreen extends GuiScrollListScreen {
+class TextFieldTestScreen extends BasicScrollableScreen {
 
-	public GuiButton doneButton;
-	
 	public TextFieldTestScreen(IScreen parentScreen) {
 		super(parentScreen);
 	}
@@ -21,12 +16,7 @@ public class TextFieldTestScreen extends GuiScrollListScreen {
 	protected void onInit() {
 		super.onInit();
 		
-		title = Text.of("Text Fields");
-		
-		doneButton = add(new GuiButton(this, Text.of("Done")));
-		doneButton.addActionListener((e) -> back());
-		
-		scrollList.layout = new ListLayout().setInnerPadding(4).setOuterPadding(8).setAlign(Align.CENTER);
+		title = B100LibClient.trans.asText("screen.textfields");
 	}
 
 	@Override
@@ -48,12 +38,6 @@ public class TextFieldTestScreen extends GuiScrollListScreen {
 		tf3.setText("Not focusable text field");
 		tf3.setEditable(false);
 		tf3.setFocusable(false);
-	}
-	
-	@Override
-	public void onResize() {
-		super.onResize();
-		setFooterButtonPosition(doneButton);
 	}
 	
 }
