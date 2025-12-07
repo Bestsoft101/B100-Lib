@@ -3,62 +3,28 @@ package b100.lib.client.gui.config;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import b100.lib.client.B100LibClient;
-import b100.lib.client.gui.ActionListener;
-import b100.lib.client.gui.GuiButton;
-import b100.lib.client.gui.GuiContainer;
 import b100.lib.client.gui.GuiElement;
 import b100.lib.client.gui.GuiScreen;
-import b100.lib.client.gui.ScreenListener;
-import b100.lib.client.translate.Translations;
 import net.minecraft.text.Text;
 
-public class BooleanToggleElement extends GuiContainer implements ActionListener, ConfigElement<Boolean>, ScreenListener {
+public class BooleanToggleElement extends AbstractButtonOptionElement implements ConfigElement<Boolean> {
 	
-	protected GuiScreen screen;
-	protected Text name;
 	protected boolean initialValue;
 	protected boolean value;
 	protected boolean defaultValue;
-	protected GuiButton button;
-	protected Text tooltipText;
+	protected Function<Boolean, Text> toTextFunction;
 	
 	private final List<ConfigElementListener> configElementListeners = new ArrayList<>();
 	private final List<Consumer<Boolean>> saveConsumers = new ArrayList<>();
 
 	public BooleanToggleElement(GuiScreen screen, String key, boolean value) {
-		this.screen = screen;
-		this.name = Translations.INSTANCE.asText(key);
+		super(screen, key);
 		this.value = initialValue = defaultValue = value;
 		
-		String tooltipText = Translations.INSTANCE.asStringOrNull(key + ".tooltip");
-		if(tooltipText != null) {
-			this.tooltipText = Text.of(tooltipText);
-		}
-		
-		button = add(new GuiButton(screen, null).addActionListener(this));
-		button.setSize(112, 20);
-		
-		setSize(320, 24);
-		
 		update();
-	}
-	
-	@Override
-	public void draw() {
-		GuiElement mouseOver = button.screen.getMouseOver();
-		if(mouseOver == this || contains(mouseOver) || button.isFocused()) {
-			utils.drawRectangle(posX, posY, width, height, 0x20FFFFFF);
-			
-			if(tooltipText != null) {
-				screen.drawWrappedTooltip(tooltipText);
-			}
-		}
-		
-		super.draw();
-		
-		utils.drawString(name, posX + 8, posY + height / 2 - 4, 0xFFFFFF, true);
 	}
 	
 	@Override
@@ -73,14 +39,11 @@ public class BooleanToggleElement extends GuiContainer implements ActionListener
 	}
 	
 	@Override
-	public void onResize() {
-		button.setPosition(posX + width - button.width - 2, posY + height / 2 - button.height / 2);
-		
-		super.onResize();
-	}
-	
-	public void update() {
-		button.text = Text.of(value ? "\247a" + B100LibClient.trans.asString("value.yes") : "\247c" + B100LibClient.trans.asString("value.no"));
+	public Text getButtonText() {
+		if(toTextFunction != null) {
+			return toTextFunction.apply(value);	
+		}
+		return Text.of(value ? "\247a" + B100LibClient.trans.asString("value.yes") : "\247c" + B100LibClient.trans.asString("value.no"));
 	}
 	
 	public boolean getValue() {
@@ -94,15 +57,6 @@ public class BooleanToggleElement extends GuiContainer implements ActionListener
 	
 	public boolean getDefaultValue() {
 		return defaultValue;
-	}
-	
-	public BooleanToggleElement setTooltipText(Text tooltipText) {
-		this.tooltipText = tooltipText;
-		return this;
-	}
-	
-	public Text getTooltipText() {
-		return tooltipText;
 	}
 
 	@Override
@@ -156,14 +110,14 @@ public class BooleanToggleElement extends GuiContainer implements ActionListener
 	public boolean removeSaveConsumer(Consumer<Boolean> saveListener) {
 		return saveConsumers.remove(saveListener);
 	}
-
-	@Override
-	public void onScreenOpened(GuiScreen screen) {
+	
+	public BooleanToggleElement setToTextFunction(Function<Boolean, Text> toTextFunction) {
+		this.toTextFunction = toTextFunction;
 		update();
+		return this;
 	}
 	
-	@Override
-	public boolean isSolid() {
-		return true;
+	public Function<Boolean, Text> getToTextFunction() {
+		return toTextFunction;
 	}
 }
