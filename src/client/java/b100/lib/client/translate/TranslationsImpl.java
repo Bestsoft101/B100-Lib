@@ -12,28 +12,28 @@ class TranslationsImpl implements Translations {
 	
 	@Override
 	public String asString(String key) {
-		String fullKey = addPrefixToKey(key);
-		String translation = Translate.get(fullKey);
+		key = addPrefixToKey(key);
+		String translation = Translate.get(key);
 		return translation != null ? translation : key;
 	}
 
 	@Override
 	public String asStringOrNull(String key) {
-		String fullKey = addPrefixToKey(key);
-		return Translate.get(fullKey);
+		key = addPrefixToKey(key);
+		return Translate.get(key);
 	}
 
 	@Override
 	public Text asText(String key) {
-		String fullKey = addPrefixToKey(key);
-		String translation = Translate.get(fullKey);
+		key = addPrefixToKey(key);
+		String translation = Translate.get(key);
 		return translation != null ? Text.of(translation) : Text.of(key);
 	}
 
 	@Override
 	public Text asTextOrNull(String key) {
-		String fullKey = addPrefixToKey(key);
-		String translation = Translate.get(fullKey);
+		key = addPrefixToKey(key);
+		String translation = Translate.get(key);
 		return translation != null ? Text.of(translation) : null;
 	}
 
