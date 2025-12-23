@@ -73,7 +73,7 @@ public class ConfigUtil {
 				try {
 					configParser.parse(key, value);
 				}catch (Exception e) {
-					throw new RuntimeException("Parsing line: '" + line + "'");
+					throw new RuntimeException("Parsing line: '" + line + "'", e);
 				}
 			}
 		}catch (Exception e) {
