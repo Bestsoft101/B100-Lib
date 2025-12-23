@@ -116,6 +116,19 @@ public class GuiTextField extends GuiElement implements Focusable {
 		return focusListeners;
 	}
 	
+	public ListenerList<ActionListener> getActionListeners() {
+		return actionListeners;
+	}
+	
+	public GuiTextField addActionListener(ActionListener actionListener) {
+		actionListeners.add(actionListener);
+		return this;
+	}
+	
+	public boolean removeActionListener(ActionListener actionListener) {
+		return actionListeners.remove(actionListener);
+	}
+	
 	public boolean isEditable() {
 		TextFieldWidgetAccess access = (TextFieldWidgetAccess) widget;
 		

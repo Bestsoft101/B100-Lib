@@ -26,9 +26,15 @@ public interface Focusable {
 	public GuiContainer getContainer();
 	
 	public static boolean isFocusable(GuiElement element) {
-		if(element instanceof Focusable) {
-			Focusable focusable = (Focusable) element;
+		if(element instanceof Focusable focusable) {
 			return focusable.isFocusable();
+		}
+		return false;
+	}
+	
+	public static boolean isFocused(GuiElement element) {
+		if(element instanceof Focusable focusable) {
+			return focusable.isFocused();
 		}
 		return false;
 	}
