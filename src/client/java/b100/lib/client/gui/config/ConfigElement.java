@@ -1,7 +1,5 @@
 package b100.lib.client.gui.config;
 
-import java.util.function.Consumer;
-
 import b100.lib.client.gui.GuiElement;
 
 public interface ConfigElement<E> {
@@ -19,9 +17,5 @@ public interface ConfigElement<E> {
 	public GuiElement addConfigElementListener(ConfigElementListener listener);
 	
 	public boolean removeConfigElementListener(ConfigElementListener listener);
-	
-	public GuiElement addSaveConsumer(Consumer<E> saveListener);
-	
-	public boolean removeSaveConsumer(Consumer<E> saveListener);
 
 }

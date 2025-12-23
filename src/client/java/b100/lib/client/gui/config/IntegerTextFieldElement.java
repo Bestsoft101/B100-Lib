@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import b100.lib.client.config.Property;
 import b100.lib.client.gui.ActionListener;
 import b100.lib.client.gui.GuiElement;
 import b100.lib.client.gui.GuiScreen;
 import b100.lib.client.gui.GuiTextField;
+import b100.lib.client.util.UpdateMode;
 import net.minecraft.text.Text;
 
 public class IntegerTextFieldElement extends AbstractOptionElement implements ActionListener, ConfigElement<Integer> {
@@ -16,13 +18,18 @@ public class IntegerTextFieldElement extends AbstractOptionElement implements Ac
 	protected int value;
 	protected int defaultValue;
 
-	private final List<ConfigElementListener> configElementListeners = new ArrayList<>();
-	private final List<Consumer<Integer>> saveConsumers = new ArrayList<>();
+	protected final List<Consumer<Integer>> updateConsumers = new ArrayList<>();
+	protected final List<Consumer<Integer>> saveConsumers = new ArrayList<>();
 	
 	public IntegerTextFieldElement(GuiScreen screen, String key, int value) {
+		this(screen, key, value, value);
+	}
+	
+	public IntegerTextFieldElement(GuiScreen screen, String key, int value, int defaultValue) {
 		super(screen, key);
-		
-		this.value = initialValue = defaultValue = value;
+
+		this.value = initialValue = value;
+		this.defaultValue = defaultValue;
 		
 		GuiTextField textField = new GuiTextField(screen, Text.of(String.valueOf(value))).addActionListener(this);
 		textField.setText(String.valueOf(value));
@@ -41,8 +48,11 @@ public class IntegerTextFieldElement extends AbstractOptionElement implements Ac
 			}catch (Exception e) {}
 			
 			if(newValue != null) {
-				System.out.println(newValue);
 				value = newValue;
+				
+				for(ConfigElementListener configElementListener : configElementListeners) {
+					configElementListener.valueChanged(this);
+				}
 			}
 		}
 	}
@@ -81,26 +91,40 @@ public class IntegerTextFieldElement extends AbstractOptionElement implements Ac
 		}
 	}
 
-	@Override
-	public GuiElement addConfigElementListener(ConfigElementListener listener) {
-		configElementListeners.add(listener);
+	public GuiElement addUpdateConsumer(Consumer<Integer> consumer) {
+		updateConsumers.add(consumer);
 		return this;
 	}
 
-	@Override
-	public boolean removeConfigElementListener(ConfigElementListener listener) {
-		return configElementListeners.remove(listener);
+	public boolean removeUpdateConsumer(Consumer<Integer> consumer) {
+		return updateConsumers.remove(consumer);
 	}
 
-	@Override
-	public GuiElement addSaveConsumer(Consumer<Integer> saveListener) {
-		saveConsumers.add(saveListener);
+	public GuiElement addSaveConsumer(Consumer<Integer> consumer) {
+		saveConsumers.add(consumer);
 		return this;
 	}
 
-	@Override
-	public boolean removeSaveConsumer(Consumer<Integer> saveListener) {
-		return saveConsumers.remove(saveListener);
+	public boolean removeSaveConsumer(Consumer<Integer> consumer) {
+		return saveConsumers.remove(consumer);
+	}
+	
+	////////////////////////////////
+	
+	public static IntegerTextFieldElement create(GuiScreen screen, String key, Property<Integer> property, UpdateMode updateMode) {
+		return create(screen, key, property.getValue(), property.getDefaultValue(), property::setValue, updateMode);
+	}
+	
+	public static IntegerTextFieldElement create(GuiScreen screen, String key, int value, int defaultValue, Consumer<Integer> consumer, UpdateMode updateMode) {
+		IntegerTextFieldElement element = new IntegerTextFieldElement(screen, key, value, defaultValue);
+		
+		if(updateMode == UpdateMode.ON_SAVE) {
+			element.addSaveConsumer(consumer);
+		}else if(updateMode == UpdateMode.ON_UPDATE) {
+			element.addUpdateConsumer(consumer);
+		}
+		
+		return element;
 	}
 	
 }

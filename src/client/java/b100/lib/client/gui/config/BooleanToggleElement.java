@@ -6,8 +6,10 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import b100.lib.client.B100LibClient;
+import b100.lib.client.config.Property;
 import b100.lib.client.gui.GuiElement;
 import b100.lib.client.gui.GuiScreen;
+import b100.lib.client.util.UpdateMode;
 import net.minecraft.text.Text;
 
 public class BooleanToggleElement extends AbstractButtonOptionElement implements ConfigElement<Boolean> {
@@ -16,13 +18,18 @@ public class BooleanToggleElement extends AbstractButtonOptionElement implements
 	protected boolean value;
 	protected boolean defaultValue;
 	protected Function<Boolean, Text> toTextFunction;
-	
-	private final List<ConfigElementListener> configElementListeners = new ArrayList<>();
-	private final List<Consumer<Boolean>> saveConsumers = new ArrayList<>();
 
+	protected final List<Consumer<Boolean>> updateConsumers = new ArrayList<>();
+	protected final List<Consumer<Boolean>> saveConsumers = new ArrayList<>();
+	
 	public BooleanToggleElement(GuiScreen screen, String key, boolean value) {
+		this(screen, key, value, value);
+	}
+
+	public BooleanToggleElement(GuiScreen screen, String key, boolean value, boolean defaultValue) {
 		super(screen, key);
-		this.value = initialValue = defaultValue = value;
+		this.value = initialValue = value;
+		this.defaultValue = defaultValue;
 		
 		update();
 	}
@@ -65,17 +72,6 @@ public class BooleanToggleElement extends AbstractButtonOptionElement implements
 	}
 
 	@Override
-	public GuiElement addConfigElementListener(ConfigElementListener listener) {
-		configElementListeners.add(listener);
-		return this;
-	}
-
-	@Override
-	public boolean removeConfigElementListener(ConfigElementListener listener) {
-		return configElementListeners.remove(listener);
-	}
-
-	@Override
 	public void resetToInitialValue() {
 		value = initialValue;
 	}
@@ -99,17 +95,6 @@ public class BooleanToggleElement extends AbstractButtonOptionElement implements
 			saveConsumer.accept(value);
 		}
 	}
-
-	@Override
-	public GuiElement addSaveConsumer(Consumer<Boolean> saveListener) {
-		saveConsumers.add(saveListener);
-		return this;
-	}
-
-	@Override
-	public boolean removeSaveConsumer(Consumer<Boolean> saveListener) {
-		return saveConsumers.remove(saveListener);
-	}
 	
 	public BooleanToggleElement setToTextFunction(Function<Boolean, Text> toTextFunction) {
 		this.toTextFunction = toTextFunction;
@@ -119,5 +104,41 @@ public class BooleanToggleElement extends AbstractButtonOptionElement implements
 	
 	public Function<Boolean, Text> getToTextFunction() {
 		return toTextFunction;
+	}
+
+	public GuiElement addUpdateConsumer(Consumer<Boolean> consumer) {
+		updateConsumers.add(consumer);
+		return this;
+	}
+
+	public boolean removeUpdateConsumer(Consumer<Boolean> consumer) {
+		return updateConsumers.remove(consumer);
+	}
+
+	public GuiElement addSaveConsumer(Consumer<Boolean> consumer) {
+		saveConsumers.add(consumer);
+		return this;
+	}
+
+	public boolean removeSaveConsumer(Consumer<Boolean> consumer) {
+		return saveConsumers.remove(consumer);
+	}
+	
+	////////////////////////////////
+	
+	public static BooleanToggleElement create(GuiScreen screen, String key, Property<Boolean> property, UpdateMode updateMode) {
+		return create(screen, key, property.getValue(), property.getDefaultValue(), property::setValue, updateMode);
+	}
+	
+	public static BooleanToggleElement create(GuiScreen screen, String key, boolean value, boolean defaultValue, Consumer<Boolean> consumer, UpdateMode updateMode) {
+		BooleanToggleElement element = new BooleanToggleElement(screen, key, value, defaultValue);
+		
+		if(updateMode == UpdateMode.ON_SAVE) {
+			element.addSaveConsumer(consumer);
+		}else if(updateMode == UpdateMode.ON_UPDATE) {
+			element.addUpdateConsumer(consumer);
+		}
+		
+		return element;
 	}
 }

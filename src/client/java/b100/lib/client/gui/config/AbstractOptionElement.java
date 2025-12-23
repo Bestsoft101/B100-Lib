@@ -1,5 +1,8 @@
 package b100.lib.client.gui.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import b100.lib.client.gui.Focusable;
 import b100.lib.client.gui.GuiContainer;
 import b100.lib.client.gui.GuiElement;
@@ -13,6 +16,8 @@ public abstract class AbstractOptionElement extends GuiContainer {
 	protected Text name;
 	protected Text tooltipText;
 	protected GuiElement element;
+	
+	protected final List<ConfigElementListener> configElementListeners = new ArrayList<>();
 	
 	public AbstractOptionElement(GuiScreen screen, String key) {
 		this.screen = screen;
@@ -54,5 +59,13 @@ public abstract class AbstractOptionElement extends GuiContainer {
 	public boolean isSolid() {
 		return true;
 	}
-	
+
+	public GuiElement addConfigElementListener(ConfigElementListener listener) {
+		configElementListeners.add(listener);
+		return this;
+	}
+
+	public boolean removeConfigElementListener(ConfigElementListener listener) {
+		return configElementListeners.remove(listener);
+	}
 }
