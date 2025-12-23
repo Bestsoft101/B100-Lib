@@ -44,13 +44,11 @@ public class CustomOptionElement<E> extends AbstractButtonOptionElement {
 		return value;
 	}
 	
-	@Deprecated
 	public CustomOptionElement<E> addActionListener(ActionListener actionListener) {
 		actionListeners.add(actionListener);
 		return this;
 	}
 	
-	@Deprecated
 	public boolean removeActionListener(ActionListener actionListener) {
 		return actionListeners.remove(actionListener);
 	}
