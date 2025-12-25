@@ -1,28 +1,35 @@
 package b100.lib.client.config;
 
-public class BooleanProperty extends BooleanPropertyBase {
-
-	public final boolean defaultValue;
+public interface BooleanProperty extends Property<Boolean> {
 	
-	protected boolean value;
+	public boolean getBoolean();
 	
-	public BooleanProperty(boolean defaultValue) {
-		this.defaultValue = defaultValue;
-		this.value = defaultValue;
+	public void setBoolean(boolean value);
+	
+	@Override
+	@Deprecated
+	default Boolean get() {
+		return getBoolean();
 	}
 	
 	@Override
-	public void setValue(Boolean value) {
-		this.value = value;
+	@Deprecated
+	default void set(Boolean value) {
+		setBoolean(value);
 	}
 	
 	@Override
-	public Boolean getValue() {
-		return value;
+	default void parse(String value) {
+		setBoolean(value.equalsIgnoreCase("true"));
 	}
-
+	
 	@Override
-	public Boolean getDefaultValue() {
-		return defaultValue;
+	default String stringValue() {
+		return String.valueOf(getBoolean());
 	}
+	
+	public static BooleanProperty create(boolean defaultValue) {
+		return new BooleanPropertyImpl(defaultValue);
+	}
+		
 }

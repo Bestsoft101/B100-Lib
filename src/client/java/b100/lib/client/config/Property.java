@@ -1,29 +1,15 @@
 package b100.lib.client.config;
 
-import java.util.Objects;
-
 public interface Property<E> {
 	
-	public void setValue(E value);
+	public E get();
 	
-	public E getValue();
+	public void set(E value);
 	
 	public E getDefaultValue();
 	
-	public default boolean isDefault() {
-		return isDefaultValue(getValue());
-	}
+	public void parse(String value);
 	
-	public default boolean isDefaultValue(E value) {
-		return Objects.equals(getValue(), getDefaultValue());
-	}
-	
-	public default void resetToDefault() {
-		setValue(getDefaultValue());
-	}
-	
-	public void parseValue(String value);
-	
-	public String getStringValue();
+	public String stringValue();
 	
 }

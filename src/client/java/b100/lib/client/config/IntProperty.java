@@ -1,28 +1,35 @@
 package b100.lib.client.config;
 
-public class IntProperty extends IntPropertyBase {
+public interface IntProperty extends Property<Integer> {
 	
-	public final int defaultValue;
+	public int getInt();
 	
-	protected int value;
+	public void setInt(int value);
 	
-	public IntProperty(int defaultValue) {
-		this.defaultValue = defaultValue;
-		this.value = defaultValue;
+	@Override
+	@Deprecated
+	default Integer get() {
+		return getInt();
 	}
 	
 	@Override
-	public void setValue(Integer value) {
-		this.value = value;
+	@Deprecated
+	default void set(Integer value) {
+		setInt(value);
 	}
 	
 	@Override
-	public Integer getValue() {
-		return value;
+	default void parse(String value) {
+		setInt(Integer.parseInt(value));
 	}
-
+	
 	@Override
-	public Integer getDefaultValue() {
-		return defaultValue;
+	default String stringValue() {
+		return String.valueOf(getInt());
 	}
+	
+	public static IntProperty create(int defaultValue) {
+		return new IntPropertyImpl(defaultValue);
+	}
+	
 }

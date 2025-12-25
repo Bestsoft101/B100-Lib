@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import b100.lib.client.B100LibClient;
-import b100.lib.client.config.Property;
+import b100.lib.client.config.BooleanProperty;
 import b100.lib.client.gui.GuiElement;
 import b100.lib.client.gui.GuiScreen;
 import b100.lib.client.util.UpdateMode;
@@ -40,6 +40,9 @@ public class BooleanToggleElement extends AbstractButtonOptionElement implements
 		
 		for(ConfigElementListener configElementListener : configElementListeners) {
 			configElementListener.valueChanged(this);
+		}
+		for(Consumer<Boolean> consumer : updateConsumers) {
+			consumer.accept(value);
 		}
 		
 		update();
@@ -126,8 +129,8 @@ public class BooleanToggleElement extends AbstractButtonOptionElement implements
 	
 	////////////////////////////////
 	
-	public static BooleanToggleElement create(GuiScreen screen, String key, Property<Boolean> property, UpdateMode updateMode) {
-		return create(screen, key, property.getValue(), property.getDefaultValue(), property::setValue, updateMode);
+	public static BooleanToggleElement create(GuiScreen screen, String key, BooleanProperty property, UpdateMode updateMode) {
+		return create(screen, key, property.getBoolean(), property.getDefaultValue(), property::setBoolean, updateMode);
 	}
 	
 	public static BooleanToggleElement create(GuiScreen screen, String key, boolean value, boolean defaultValue, Consumer<Boolean> consumer, UpdateMode updateMode) {

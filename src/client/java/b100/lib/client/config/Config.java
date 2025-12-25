@@ -9,9 +9,8 @@ import java.util.Map;
 
 import b100.lib.Print;
 import b100.lib.client.util.ConfigUtil;
-import b100.lib.client.util.ConfigUtil.ConfigParser;
 
-public class Config implements ConfigParser {
+public class Config {
 	
 	public File configFile;
 	
@@ -30,19 +29,19 @@ public class Config implements ConfigParser {
 		return property;
 	}
 	
-	@Override
 	public void parse(String key, String value) {
 		Property<?> property = propertyMap.get(key);
 		if(property == null) {
-			Print.print("Unknown Config Property: " + key);
+			Print.print("Unknown config property: " + key);
 			return;
 		}
-		property.parseValue(value);
+		
+		property.parse(value);
 	}
 	
 	public void load() {
 		if(configFile.exists()) {
-			ConfigUtil.loadConfig(configFile, this, ':');	
+			ConfigUtil.loadConfig(configFile, this::parse, ':');	
 		}
 	}
 	
@@ -50,15 +49,19 @@ public class Config implements ConfigParser {
 		StringBuilder str = new StringBuilder();
 		Map<Property<?>, String> propertyKeys = getPropertyKeyMap();
 		
-		for(int i=0; i < allProperties.size(); i++) {
-			if(i > 0) {
+		int written = 0;
+		for(Property<?> property : allProperties) {
+			String stringValue = property.stringValue();
+			if(stringValue == null) {
+				continue;
+			}
+			if(written > 0) {
 				str.append('\n');
 			}
-			
-			Property<?> property = allProperties.get(i);
 			str.append(propertyKeys.get(property));
 			str.append(':');
-			str.append(property.getStringValue());
+			str.append(stringValue);
+			written++;
 		}
 		
 		ConfigUtil.saveStringToFile(str.toString(), configFile);

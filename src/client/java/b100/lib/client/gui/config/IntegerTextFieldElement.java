@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import b100.lib.client.config.Property;
+import b100.lib.client.config.IntProperty;
 import b100.lib.client.gui.ActionListener;
 import b100.lib.client.gui.GuiElement;
 import b100.lib.client.gui.GuiScreen;
@@ -52,6 +52,9 @@ public class IntegerTextFieldElement extends AbstractOptionElement implements Ac
 				
 				for(ConfigElementListener configElementListener : configElementListeners) {
 					configElementListener.valueChanged(this);
+				}
+				for(Consumer<Integer> consumer : updateConsumers) {
+					consumer.accept(value);
 				}
 			}
 		}
@@ -111,8 +114,8 @@ public class IntegerTextFieldElement extends AbstractOptionElement implements Ac
 	
 	////////////////////////////////
 	
-	public static IntegerTextFieldElement create(GuiScreen screen, String key, Property<Integer> property, UpdateMode updateMode) {
-		return create(screen, key, property.getValue(), property.getDefaultValue(), property::setValue, updateMode);
+	public static IntegerTextFieldElement create(GuiScreen screen, String key, IntProperty property, UpdateMode updateMode) {
+		return create(screen, key, property.getInt(), property.getDefaultValue(), property::setInt, updateMode);
 	}
 	
 	public static IntegerTextFieldElement create(GuiScreen screen, String key, int value, int defaultValue, Consumer<Integer> consumer, UpdateMode updateMode) {

@@ -1,29 +1,35 @@
 package b100.lib.client.config;
 
-public class DoubleProperty extends DoublePropertyBase {
+public interface DoubleProperty extends Property<Double> {
 	
-	public final double defaultValue;
+	public double getDouble();
 	
-	protected double value;
+	public void setDouble(double value);
 	
-	public DoubleProperty(double defaultValue) {
-		this.defaultValue = defaultValue;
-		this.value = defaultValue;
+	@Override
+	@Deprecated
+	default Double get() {
+		return getDouble();
 	}
 	
 	@Override
-	public void setValue(Double value) {
-		this.value = value;
+	@Deprecated
+	default void set(Double value) {
+		setDouble(value);
 	}
 	
 	@Override
-	public Double getValue() {
-		return value;
+	default void parse(String value) {
+		setDouble(Double.parseDouble(value));
 	}
-
+	
 	@Override
-	public Double getDefaultValue() {
-		return defaultValue;
+	default String stringValue() {
+		return String.valueOf(getDouble());
+	}
+	
+	public static DoubleProperty create(double defaultValue) {
+		return new DoublePropertyImpl(defaultValue);
 	}
 	
 }
