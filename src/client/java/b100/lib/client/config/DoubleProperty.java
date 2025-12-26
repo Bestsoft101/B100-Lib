@@ -1,5 +1,8 @@
 package b100.lib.client.config;
 
+import java.util.function.DoubleConsumer;
+import java.util.function.DoubleSupplier;
+
 public interface DoubleProperty extends Property<Double> {
 	
 	public double getDouble();
@@ -30,6 +33,26 @@ public interface DoubleProperty extends Property<Double> {
 	
 	public static DoubleProperty create(double defaultValue) {
 		return new DoublePropertyImpl(defaultValue);
+	}
+	
+	public static DoubleProperty create(final double defaultValue, DoubleSupplier get, DoubleConsumer set) {
+		DoubleProperty prop = new DoubleProperty() {
+			@Override
+			public double getDouble() {
+				return get.getAsDouble();
+			}
+
+			@Override
+			public void setDouble(double value) {
+				set.accept(value);
+			}
+
+			@Override
+			public Double getDefaultValue() {
+				return defaultValue;
+			}
+		};
+		return prop;
 	}
 	
 }
