@@ -1,10 +1,10 @@
 package b100.lib.client.config;
 
-class BooleanPropertyImpl implements BooleanProperty {
+public class BooleanPropertyImpl implements BooleanProperty {
 
-	private final boolean defaultValue;
+	protected final boolean defaultValue;
 	
-	private boolean value;
+	protected boolean value;
 	
 	public BooleanPropertyImpl(boolean defaultValue) {
 		this.defaultValue = this.value = defaultValue;

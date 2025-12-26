@@ -1,10 +1,10 @@
 package b100.lib.client.config;
 
-class IntPropertyImpl implements IntProperty {
+public class IntPropertyImpl implements IntProperty {
 
-	private final int defaultValue;
+	protected final int defaultValue;
 	
-	private int value;
+	protected int value;
 	
 	public IntPropertyImpl(int defaultValue) {
 		this.defaultValue = this.value = defaultValue;

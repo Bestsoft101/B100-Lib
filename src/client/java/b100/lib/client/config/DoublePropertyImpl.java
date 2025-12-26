@@ -1,10 +1,10 @@
 package b100.lib.client.config;
 
-class DoublePropertyImpl implements DoubleProperty {
+public class DoublePropertyImpl implements DoubleProperty {
 
-	private final double defaultValue;
+	protected final double defaultValue;
 	
-	private double value;
+	protected double value;
 	
 	public DoublePropertyImpl(double defaultValue) {
 		this.defaultValue = this.value = defaultValue;
