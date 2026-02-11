@@ -1,12 +1,10 @@
 package b100.lib.client.gui.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import b100.lib.client.gui.Focusable;
 import b100.lib.client.gui.GuiContainer;
 import b100.lib.client.gui.GuiElement;
 import b100.lib.client.gui.GuiScreen;
+import b100.lib.client.gui.ListenerList;
 import b100.lib.client.translate.Translations;
 import net.minecraft.text.Text;
 
@@ -17,7 +15,7 @@ public abstract class AbstractOptionElement extends GuiContainer {
 	protected Text tooltipText;
 	protected GuiElement element;
 	
-	protected final List<ConfigElementListener> configElementListeners = new ArrayList<>();
+	protected final ListenerList<ConfigElementListener> configElementListeners = new ListenerList<>(this);
 	
 	public AbstractOptionElement(GuiScreen screen, String key) {
 		this.screen = screen;

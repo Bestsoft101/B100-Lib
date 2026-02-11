@@ -49,10 +49,9 @@ public class IntegerTextFieldElement extends AbstractOptionElement implements Ac
 			
 			if(newValue != null) {
 				value = newValue;
+
+				configElementListeners.forEach(listener -> listener.valueChanged(this));
 				
-				for(ConfigElementListener configElementListener : configElementListeners) {
-					configElementListener.valueChanged(this);
-				}
 				for(Consumer<Integer> consumer : updateConsumers) {
 					consumer.accept(value);
 				}

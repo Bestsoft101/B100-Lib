@@ -38,9 +38,8 @@ public class BooleanToggleElement extends AbstractButtonOptionElement implements
 	public void actionPerformed(GuiElement source) {
 		value = !value;
 		
-		for(ConfigElementListener configElementListener : configElementListeners) {
-			configElementListener.valueChanged(this);
-		}
+		configElementListeners.forEach(listener -> listener.valueChanged(this));
+		
 		for(Consumer<Boolean> consumer : updateConsumers) {
 			consumer.accept(value);
 		}

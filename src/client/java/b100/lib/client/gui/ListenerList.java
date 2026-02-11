@@ -29,6 +29,10 @@ public final class ListenerList<ListenerType> {
 			Print.debugPrint("Add " + e + " to " + this);
 		}
 		
+		if(e == null) {
+			throw new NullPointerException("Listener is null!");
+		}
+		
 		if(iterating) {
 			throw new ConcurrentModificationException("Modified list " + this + " while iterating!");
 		}
