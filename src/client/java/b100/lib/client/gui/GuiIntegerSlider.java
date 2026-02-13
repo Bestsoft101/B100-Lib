@@ -34,7 +34,7 @@ public class GuiIntegerSlider extends GuiSlider<Integer> {
 	@Override
 	public void setValue(Integer value) {
 		if(sliderValue != value) {
-			sliderValue = MathHelper.clamp(value, 0, steps - 1);
+			sliderValue = MathHelper.clamp(value, offset, offset + steps - 1);
 			onValueChange(value);
 		}
 	}

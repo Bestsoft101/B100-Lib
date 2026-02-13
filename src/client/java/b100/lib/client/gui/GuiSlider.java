@@ -5,6 +5,7 @@ import org.lwjgl.glfw.GLFW;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 
 public abstract class GuiSlider<T> extends GuiElement implements Focusable {
 	
@@ -54,9 +55,9 @@ public abstract class GuiSlider<T> extends GuiElement implements Focusable {
 		
 		if(dragging) {
 			float mouseX = (float) screen.mouseX;
-			
-			T newValue = convertFloatToSliderValue((mouseX - posX - (HANDLE_WIDTH / 2)) / (width - HANDLE_WIDTH));
-			
+			float f = (mouseX - posX - (HANDLE_WIDTH / 2)) / (width - HANDLE_WIDTH);
+			f = MathHelper.clamp(f, 0.0f, 1.0f);
+			T newValue = convertFloatToSliderValue(f);
 			setValue(newValue);
 		}
 		
