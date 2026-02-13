@@ -3,7 +3,7 @@ package b100.lib.client;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 
-import b100.lib.client.gui.ScreenWrapper;
+import b100.lib.client.gui.util.ScreenWrapper;
 import b100.lib.client.mixin.IScreen;
 import b100.lib.client.test.B100LibTesting;
 

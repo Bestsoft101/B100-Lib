@@ -2,14 +2,14 @@ package b100.lib.client.gui.config.element;
 
 import java.util.function.Consumer;
 
-import b100.lib.client.config.FloatProperty;
-import b100.lib.client.gui.GuiFloatSlider;
-import b100.lib.client.gui.GuiScreen;
-import b100.lib.client.gui.GuiSlider;
-import b100.lib.client.gui.SliderListener;
 import b100.lib.client.gui.config.base.ConfigElement;
 import b100.lib.client.gui.config.base.SliderOptionElement;
+import b100.lib.client.gui.element.GuiFloatSlider;
+import b100.lib.client.gui.element.GuiSlider;
+import b100.lib.client.gui.listener.SliderListener;
+import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.util.UpdateMode;
+import b100.lib.config.property.FloatProperty;
 
 public class FloatSliderElement extends SliderOptionElement<Float> implements ConfigElement<Float>, SliderListener<Float> {
 

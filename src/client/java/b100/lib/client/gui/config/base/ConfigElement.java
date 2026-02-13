@@ -1,6 +1,6 @@
 package b100.lib.client.gui.config.base;
 
-import b100.lib.client.gui.GuiElement;
+import b100.lib.client.gui.element.GuiElement;
 
 public interface ConfigElement<E> {
 	

@@ -2,14 +2,14 @@ package b100.lib.client.gui.config.element;
 
 import java.util.function.Consumer;
 
-import b100.lib.client.config.IntProperty;
-import b100.lib.client.gui.ActionListener;
-import b100.lib.client.gui.GuiElement;
-import b100.lib.client.gui.GuiScreen;
-import b100.lib.client.gui.GuiTextField;
 import b100.lib.client.gui.config.base.OptionElement;
+import b100.lib.client.gui.element.GuiElement;
+import b100.lib.client.gui.element.GuiTextField;
+import b100.lib.client.gui.listener.ActionListener;
+import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.config.base.ConfigElement;
 import b100.lib.client.util.UpdateMode;
+import b100.lib.config.property.IntProperty;
 import net.minecraft.text.Text;
 
 public class IntegerTextFieldElement extends OptionElement<Integer, GuiTextField> implements ActionListener, ConfigElement<Integer> {

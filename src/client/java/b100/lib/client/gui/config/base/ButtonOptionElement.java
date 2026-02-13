@@ -1,9 +1,9 @@
 package b100.lib.client.gui.config.base;
 
-import b100.lib.client.gui.ActionListener;
-import b100.lib.client.gui.GuiButton;
-import b100.lib.client.gui.GuiScreen;
-import b100.lib.client.gui.ScreenListener;
+import b100.lib.client.gui.element.GuiButton;
+import b100.lib.client.gui.listener.ActionListener;
+import b100.lib.client.gui.listener.ScreenListener;
+import b100.lib.client.gui.screen.GuiScreen;
 import net.minecraft.text.Text;
 
 public abstract class ButtonOptionElement<T extends Comparable<T>> extends OptionElement<T, GuiButton> implements ActionListener, ScreenListener {

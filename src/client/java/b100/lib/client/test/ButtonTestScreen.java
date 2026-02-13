@@ -1,7 +1,7 @@
 package b100.lib.client.test;
 
 import b100.lib.client.B100LibClient;
-import b100.lib.client.gui.GuiButton;
+import b100.lib.client.gui.element.GuiButton;
 import b100.lib.client.mixin.IScreen;
 import net.minecraft.text.Text;
 

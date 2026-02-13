@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import b100.lib.Print;
-import b100.lib.client.util.ConfigUtil;
+import b100.lib.util.ConfigUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.LanguageManager;
 import net.minecraft.text.Text;

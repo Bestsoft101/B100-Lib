@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import b100.lib.client.B100LibClient;
-import b100.lib.client.gui.GuiButton;
-import b100.lib.client.gui.GuiScreen;
 import b100.lib.client.gui.config.base.ConfigElement;
 import b100.lib.client.gui.config.base.ConfigElementListener;
+import b100.lib.client.gui.element.GuiButton;
+import b100.lib.client.gui.screen.GuiScreen;
 
 public class SaveConfigButton extends GuiButton implements ConfigElementListener {
 

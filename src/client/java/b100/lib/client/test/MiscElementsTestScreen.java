@@ -2,9 +2,9 @@ package b100.lib.client.test;
 
 import b100.lib.Print;
 import b100.lib.client.B100LibClient;
-import b100.lib.client.gui.GuiButton;
-import b100.lib.client.gui.GuiFloatSlider;
-import b100.lib.client.gui.GuiTextField;
+import b100.lib.client.gui.element.GuiButton;
+import b100.lib.client.gui.element.GuiFloatSlider;
+import b100.lib.client.gui.element.GuiTextField;
 import b100.lib.client.mixin.IScreen;
 import net.minecraft.text.Text;
 

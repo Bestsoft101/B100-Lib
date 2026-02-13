@@ -1,8 +1,8 @@
 package b100.lib.client.gui.config.base;
 
-import b100.lib.client.gui.GuiScreen;
-import b100.lib.client.gui.GuiSlider;
-import b100.lib.client.gui.SliderListener;
+import b100.lib.client.gui.element.GuiSlider;
+import b100.lib.client.gui.listener.SliderListener;
+import b100.lib.client.gui.screen.GuiScreen;
 
 public abstract class SliderOptionElement<T extends Comparable<T>> extends OptionElement<T, GuiSlider<T>> implements SliderListener<T> {
 

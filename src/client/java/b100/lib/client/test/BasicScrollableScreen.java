@@ -1,10 +1,10 @@
 package b100.lib.client.test;
 
 import b100.lib.client.B100LibClient;
-import b100.lib.client.gui.GuiButton;
-import b100.lib.client.gui.GuiScrollListScreen;
-import b100.lib.client.gui.GuiScrollableList.ListLayout;
-import b100.lib.client.gui.GuiScrollableList.ListLayout.Align;
+import b100.lib.client.gui.element.GuiButton;
+import b100.lib.client.gui.element.GuiScrollableList.ListLayout;
+import b100.lib.client.gui.element.GuiScrollableList.ListLayout.Align;
+import b100.lib.client.gui.screen.GuiScrollListScreen;
 import b100.lib.client.mixin.IScreen;
 
 abstract class BasicScrollableScreen extends GuiScrollListScreen {

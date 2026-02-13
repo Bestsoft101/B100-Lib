@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import b100.lib.client.B100LibClient;
-import b100.lib.client.gui.GuiButton;
+import b100.lib.client.gui.element.GuiButton;
 import b100.lib.client.mixin.IScreen;
 import b100.lib.client.translate.Translate;
 import net.minecraft.text.Text;

@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import b100.lib.client.gui.GuiListButton;
-import b100.lib.client.gui.GuiScreen;
+import b100.lib.client.gui.element.GuiListButton;
+import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.mixin.IScreen;
 import b100.lib.client.translate.Translate;
-import b100.lib.client.util.ConfigUtil;
+import b100.lib.util.ConfigUtil;
 import net.minecraft.client.font.MultilineText;
 import net.minecraft.text.Text;
 

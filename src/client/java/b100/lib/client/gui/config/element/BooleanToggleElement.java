@@ -4,11 +4,11 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import b100.lib.client.B100LibClient;
-import b100.lib.client.config.BooleanProperty;
-import b100.lib.client.gui.GuiElement;
-import b100.lib.client.gui.GuiScreen;
 import b100.lib.client.gui.config.base.ButtonOptionElement;
+import b100.lib.client.gui.element.GuiElement;
+import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.util.UpdateMode;
+import b100.lib.config.property.BooleanProperty;
 import net.minecraft.text.Text;
 
 public class BooleanToggleElement extends ButtonOptionElement<Boolean> {

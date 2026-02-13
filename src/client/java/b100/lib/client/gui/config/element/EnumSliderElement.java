@@ -2,13 +2,13 @@ package b100.lib.client.gui.config.element;
 
 import java.util.function.Consumer;
 
-import b100.lib.client.config.EnumProperty;
-import b100.lib.client.gui.GuiEnumSlider;
-import b100.lib.client.gui.GuiScreen;
-import b100.lib.client.gui.GuiSlider;
 import b100.lib.client.gui.config.base.ConfigElement;
 import b100.lib.client.gui.config.base.SliderOptionElement;
+import b100.lib.client.gui.element.GuiEnumSlider;
+import b100.lib.client.gui.element.GuiSlider;
+import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.util.UpdateMode;
+import b100.lib.config.property.EnumProperty;
 
 public class EnumSliderElement<E extends Enum<E>> extends SliderOptionElement<E> implements ConfigElement<E> {
 	

@@ -5,16 +5,6 @@ import java.io.File;
 import b100.lib.B100Lib;
 import b100.lib.Print;
 import b100.lib.client.B100LibClient;
-import b100.lib.client.config.BooleanProperty;
-import b100.lib.client.config.Config;
-import b100.lib.client.config.EnumProperty;
-import b100.lib.client.config.FloatProperty;
-import b100.lib.client.config.IntProperty;
-import b100.lib.client.gui.GuiButton;
-import b100.lib.client.gui.GuiContainer;
-import b100.lib.client.gui.GuiElement;
-import b100.lib.client.gui.GuiScrollListScreen;
-import b100.lib.client.gui.GuiScrollableList.ListLayout;
 import b100.lib.client.gui.config.SaveConfigButton;
 import b100.lib.client.gui.config.base.ConfigElement;
 import b100.lib.client.gui.config.element.BooleanToggleElement;
@@ -23,8 +13,18 @@ import b100.lib.client.gui.config.element.EnumToggleElement;
 import b100.lib.client.gui.config.element.FloatSliderElement;
 import b100.lib.client.gui.config.element.IntegerSliderElement;
 import b100.lib.client.gui.config.element.IntegerTextFieldElement;
+import b100.lib.client.gui.element.GuiButton;
+import b100.lib.client.gui.element.GuiContainer;
+import b100.lib.client.gui.element.GuiElement;
+import b100.lib.client.gui.element.GuiScrollableList.ListLayout;
+import b100.lib.client.gui.screen.GuiScrollListScreen;
 import b100.lib.client.mixin.IScreen;
 import b100.lib.client.util.UpdateMode;
+import b100.lib.config.Config;
+import b100.lib.config.property.BooleanProperty;
+import b100.lib.config.property.EnumProperty;
+import b100.lib.config.property.FloatProperty;
+import b100.lib.config.property.IntProperty;
 
 class ConfigElementTestScreen extends GuiScrollListScreen {
 	

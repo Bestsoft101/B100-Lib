@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import b100.lib.client.gui.Focusable;
-import b100.lib.client.gui.GuiContainer;
-import b100.lib.client.gui.GuiElement;
-import b100.lib.client.gui.GuiScreen;
-import b100.lib.client.gui.ListenerList;
+import b100.lib.client.gui.element.Focusable;
+import b100.lib.client.gui.element.GuiContainer;
+import b100.lib.client.gui.element.GuiElement;
+import b100.lib.client.gui.screen.GuiScreen;
+import b100.lib.client.gui.util.ListenerList;
 import b100.lib.client.translate.Translations;
 import net.minecraft.text.Text;
 
