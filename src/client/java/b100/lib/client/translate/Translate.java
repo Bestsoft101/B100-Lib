@@ -10,18 +10,12 @@ import b100.lib.Print;
 import b100.lib.util.ConfigUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.LanguageManager;
-import net.minecraft.text.Text;
 
 public class Translate {
 
 	private static final Map<String, String> translations = new HashMap<>();
 	private static final Set<SearchTarget> searchTargets = new HashSet<>();
 	
-	@Deprecated
-	public static void registerNamespace(String namespace) {
-		Translations.loadFromNamespace(namespace);
-	}
-
 	////////////////////////////////
 	
 	public static Set<String> getAllLanguageFilePaths(String language) {
@@ -98,44 +92,4 @@ public class Translate {
 	protected static String get(String key) {
 		return translations.get(key);
 	}
-	
-	////////////////////////////////
-	
-	@Deprecated
-	/**
-	 * Translate as {@link Text} <br>
-	 * Return the key if it doesn't exist
-	 */
-	public static Text translate(String key) {
-		String value = translations.get(key);
-		if(value != null) {
-			return Text.of(value);
-		}
-		return Text.of(key);
-	}
-
-	@Deprecated
-	/**
-	 * Translate as {@link String} <br>
-	 * Return null if it doesn't exist
-	 */
-	public static String translateIfExists(String key) {
-		return translations.get(key);
-	}
-
-	@Deprecated
-	/**
-	 * Translate as {@link Text} <br>
-	 * Return the key if it doesn't exist
-	 */
-	public static String translateToString(String key) {
-		String translation = translations.get(key);
-		return translation != null ? translation : key;
-	}
-
-	@Deprecated
-	public static boolean translationExists(String key) {
-		return translations.containsKey(key);
-	}
-	
 }
