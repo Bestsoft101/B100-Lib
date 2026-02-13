@@ -1,4 +1,4 @@
-package b100.lib.client.gui.config;
+package b100.lib.client.gui.config.base;
 
 import b100.lib.client.gui.Focusable;
 import b100.lib.client.gui.GuiContainer;
@@ -10,7 +10,8 @@ import net.minecraft.text.Text;
 
 public abstract class AbstractOptionElement extends GuiContainer {
 
-	protected GuiScreen screen;
+	public final GuiScreen screen;
+	
 	protected Text name;
 	protected Text tooltipText;
 	protected GuiElement element;
@@ -31,13 +32,6 @@ public abstract class AbstractOptionElement extends GuiContainer {
 	}
 	
 	@Override
-	public void onResize() {
-		element.setPosition(posX + width - element.width - 2, posY + height / 2 - element.height / 2);
-		
-		super.onResize();
-	}
-	
-	@Override
 	public void draw() {
 		GuiElement mouseOver = screen.getMouseOver();
 		if(mouseOver == this || contains(mouseOver) || Focusable.isFocused(element)) {
@@ -54,8 +48,10 @@ public abstract class AbstractOptionElement extends GuiContainer {
 	}
 	
 	@Override
-	public boolean isSolid() {
-		return true;
+	public void onResize() {
+		element.setPosition(posX + width - element.width - 2, posY + height / 2 - element.height / 2);
+		
+		super.onResize();
 	}
 
 	public GuiElement addConfigElementListener(ConfigElementListener listener) {
@@ -65,5 +61,19 @@ public abstract class AbstractOptionElement extends GuiContainer {
 
 	public boolean removeConfigElementListener(ConfigElementListener listener) {
 		return configElementListeners.remove(listener);
+	}
+	
+	public AbstractOptionElement setTooltipText(Text tooltipText) {
+		this.tooltipText = tooltipText;
+		return this;
+	}
+	
+	public Text getTooltipText() {
+		return tooltipText;
+	}
+	
+	@Override
+	public boolean isSolid() {
+		return true;
 	}
 }

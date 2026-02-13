@@ -1,4 +1,4 @@
-package b100.lib.client.gui.config;
+package b100.lib.client.gui.config.base;
 
 public interface ConfigElementListener {
 	

@@ -1,16 +1,21 @@
 b100lib.lorem_ipsum=Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in dolor nisl. Quisque volutpat, urna a efficitur commodo, magna felis dictum nulla, vitae finibus nibh massa sit amet ante. Integer fringilla ultrices enim et mollis. Donec non erat tellus. Sed accumsan tortor sapien, vel rhoncus turpis vulputate id.
 
 b100lib.button.done=Done
+b100lib.button.cancel=Cancel
 b100lib.button.saveAndQuit=Save and Quit
 
 b100lib.screen.gui_demo=GUI Demo
 b100lib.screen.buttons=Buttons
-b100lib.screen.textfields=Text Fields
+b100lib.screen.miscElements=Misc Elements
 b100lib.screen.translations=Translations
 b100lib.screen.configTest=Config Elements
 
 b100lib.value.yes=Yes
 b100lib.value.no=No
 
-b100lib.option.test.boolean=Boolean Value
-b100lib.option.test.integer.textField=Integer Value
+b100lib.option.test.boolean.toggle=Boolean Toggle
+b100lib.option.test.integer.textField=Integer Text Field
+b100lib.option.test.integer.slider=Integer Slider
+b100lib.option.test.float.slider=Float Slider
+b100lib.option.test.enum.toggle=Enum Toggle
+b100lib.option.test.enum.slider=Enum Slider

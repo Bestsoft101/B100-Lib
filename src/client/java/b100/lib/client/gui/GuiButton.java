@@ -8,24 +8,16 @@ import net.minecraft.util.Identifier;
 
 public class GuiButton extends GuiElement implements Focusable {
 	
-	/**
-	 * The screen that is button is in
-	 */
-	public GuiScreen screen;
+	/** The screen that this button is in */
+	public final GuiScreen screen;
 	
-	/**
-	 * The text of this button. Can be null.
-	 */
+	/** The text of this button. Can be null. */
 	public Text text;
 	
-	/**
-	 * Should the button be clickable or not. When it is not clickable, its still visible but grayed out
-	 */
+	/** Should the button be clickable or grayed out */
 	private boolean clickable = true;
 	
-	/**
-	 * When the button is focused it can be clicked with Space and Enter
-	 */
+	/** When the button is focused it can be clicked with Space and Enter */
 	private boolean focused = false;
 	
 	public final ListenerList<ActionListener> actionListeners = new ListenerList<>(this);

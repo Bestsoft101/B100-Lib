@@ -1,7 +1,7 @@
 package b100.lib.client.config;
 
-import java.util.function.DoubleConsumer;
-import java.util.function.DoubleSupplier;
+import b100.lib.client.util.consumer.DoubleConsumer;
+import b100.lib.client.util.supplier.DoubleSupplier;
 
 public interface DoubleProperty extends Property<Double> {
 	
@@ -31,6 +31,8 @@ public interface DoubleProperty extends Property<Double> {
 		return String.valueOf(getDouble());
 	}
 	
+	////////////////////////////////
+	
 	public static DoubleProperty create(double defaultValue) {
 		return new DoublePropertyImpl(defaultValue);
 	}
@@ -39,7 +41,7 @@ public interface DoubleProperty extends Property<Double> {
 		DoubleProperty prop = new DoubleProperty() {
 			@Override
 			public double getDouble() {
-				return get.getAsDouble();
+				return get.getDouble();
 			}
 
 			@Override

@@ -1,4 +1,4 @@
-package b100.lib.client.gui.config;
+package b100.lib.client.gui.config.base;
 
 import b100.lib.client.gui.ActionListener;
 import b100.lib.client.gui.GuiButton;
@@ -13,7 +13,6 @@ public abstract class AbstractButtonOptionElement extends AbstractOptionElement 
 		
 		element = add(new GuiButton(screen, null).addActionListener(this));
 		element.setSize(112, 20);
-		
 	}
 	
 	public void update() {
@@ -21,23 +20,14 @@ public abstract class AbstractButtonOptionElement extends AbstractOptionElement 
 	}
 	
 	public abstract Text getButtonText();
-	
-	protected GuiButton getButton() {
-		return (GuiButton) element;
-	}
 
 	@Override
 	public void onScreenOpened(GuiScreen screen) {
 		update();
 	}
 	
-	public AbstractButtonOptionElement setTooltipText(Text tooltipText) {
-		this.tooltipText = tooltipText;
-		return this;
-	}
-	
-	public Text getTooltipText() {
-		return tooltipText;
+	public GuiButton getButton() {
+		return (GuiButton) element;
 	}
 	
 }

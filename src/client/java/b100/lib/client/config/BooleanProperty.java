@@ -1,8 +1,7 @@
 package b100.lib.client.config;
 
-import java.util.function.BooleanSupplier;
-
-import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
+import b100.lib.client.util.consumer.BooleanConsumer;
+import b100.lib.client.util.supplier.BooleanSupplier;
 
 public interface BooleanProperty extends Property<Boolean> {
 	
@@ -32,6 +31,8 @@ public interface BooleanProperty extends Property<Boolean> {
 		return String.valueOf(getBoolean());
 	}
 	
+	////////////////////////////////
+	
 	public static BooleanProperty create(boolean defaultValue) {
 		return new BooleanPropertyImpl(defaultValue);
 	}
@@ -40,7 +41,7 @@ public interface BooleanProperty extends Property<Boolean> {
 		BooleanProperty prop = new BooleanProperty() {
 			@Override
 			public boolean getBoolean() {
-				return get.getAsBoolean();
+				return get.getBoolean();
 			}
 
 			@Override

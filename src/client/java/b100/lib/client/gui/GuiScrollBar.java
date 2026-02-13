@@ -2,7 +2,7 @@ package b100.lib.client.gui;
 
 public class GuiScrollBar extends GuiElement {
 
-	public GuiScreen screen;
+	public final GuiScreen screen;
 	public GuiScrollableList list;
 	
 	protected boolean dragging = false;

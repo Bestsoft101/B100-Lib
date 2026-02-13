@@ -25,8 +25,8 @@ class TestScreen extends BasicScrollableScreen {
 		button.addActionListener((e) -> utils.setScreen(new ButtonTestScreen(this)));
 		scrollList.add(button);
 		
-		button = new GuiButton(this, B100LibClient.trans.asText("screen.textfields"));
-		button.addActionListener((e) -> utils.setScreen(new TextFieldTestScreen(this)));
+		button = new GuiButton(this, B100LibClient.trans.asText("screen.miscElements"));
+		button.addActionListener((e) -> utils.setScreen(new MiscElementsTestScreen(this)));
 		scrollList.add(button);
 		
 		button = new GuiButton(this, B100LibClient.trans.asText("screen.translations"));

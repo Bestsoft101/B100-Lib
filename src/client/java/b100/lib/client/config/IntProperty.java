@@ -1,7 +1,7 @@
 package b100.lib.client.config;
 
-import java.util.function.IntConsumer;
-import java.util.function.IntSupplier;
+import b100.lib.client.util.consumer.IntConsumer;
+import b100.lib.client.util.supplier.IntSupplier;
 
 public interface IntProperty extends Property<Integer> {
 	
@@ -31,6 +31,8 @@ public interface IntProperty extends Property<Integer> {
 		return String.valueOf(getInt());
 	}
 	
+	////////////////////////////////
+	
 	public static IntProperty create(int defaultValue) {
 		return new IntPropertyImpl(defaultValue);
 	}
@@ -39,7 +41,7 @@ public interface IntProperty extends Property<Integer> {
 		IntProperty prop = new IntProperty() {
 			@Override
 			public int getInt() {
-				return get.getAsInt();
+				return get.getInt();
 			}
 
 			@Override

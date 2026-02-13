@@ -5,7 +5,7 @@ import net.minecraft.util.math.MathHelper;
 
 public class GuiScrollableList extends GuiContainer {
 	
-	public GuiScreen screen;
+	public final GuiScreen screen;
 	public Layout layout;
 	
 	private double scrollAmount = 0.0;

@@ -14,6 +14,12 @@ public class Textures {
 	public final Identifier buttonNormal = Identifier.ofVanilla("widget/button");
 	public final Identifier buttonDisabled = Identifier.ofVanilla("widget/button_disabled");
 
+	public final Identifier sliderNormal = Identifier.ofVanilla("widget/slider");
+	public final Identifier sliderHighlighted = Identifier.ofVanilla("widget/slider_highlighted");
+	
+	public final Identifier sliderHandle = Identifier.ofVanilla("widget/slider_handle");
+	public final Identifier sliderHandleHighlighted = Identifier.ofVanilla("widget/slider_handle_highlighted");
+
 	public final Identifier scroller = Identifier.ofVanilla("widget/scroller");
 	public final Identifier scrollerBackground = Identifier.ofVanilla("widget/scroller_background");
 	

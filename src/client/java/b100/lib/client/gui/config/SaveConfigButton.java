@@ -6,6 +6,8 @@ import java.util.Set;
 import b100.lib.client.B100LibClient;
 import b100.lib.client.gui.GuiButton;
 import b100.lib.client.gui.GuiScreen;
+import b100.lib.client.gui.config.base.ConfigElement;
+import b100.lib.client.gui.config.base.ConfigElementListener;
 
 public class SaveConfigButton extends GuiButton implements ConfigElementListener {
 

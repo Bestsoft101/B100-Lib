@@ -16,6 +16,8 @@ public interface Property<E> {
 	
 	public String stringValue();
 	
+	////////////////////////////////
+	
 	public static <E> Property<E> create(final E defaultValue, Function<String, E> parser, Function<E, String> toString) {
 		Property<E> prop = new Property<E>() {
 			E value;

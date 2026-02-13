@@ -9,14 +9,16 @@ import b100.lib.client.B100LibClient;
 import b100.lib.client.config.BooleanProperty;
 import b100.lib.client.gui.GuiElement;
 import b100.lib.client.gui.GuiScreen;
+import b100.lib.client.gui.config.base.AbstractButtonOptionElement;
+import b100.lib.client.gui.config.base.ConfigElement;
 import b100.lib.client.util.UpdateMode;
 import net.minecraft.text.Text;
 
 public class BooleanToggleElement extends AbstractButtonOptionElement implements ConfigElement<Boolean> {
-	
+
+	protected final boolean defaultValue;
 	protected boolean initialValue;
 	protected boolean value;
-	protected boolean defaultValue;
 	protected Function<Boolean, Text> toTextFunction;
 
 	protected final List<Consumer<Boolean>> updateConsumers = new ArrayList<>();
@@ -53,19 +55,6 @@ public class BooleanToggleElement extends AbstractButtonOptionElement implements
 			return toTextFunction.apply(value);	
 		}
 		return Text.of(value ? "\247a" + B100LibClient.trans.asString("value.yes") : "\247c" + B100LibClient.trans.asString("value.no"));
-	}
-	
-	public boolean getValue() {
-		return value;
-	}
-	
-	public BooleanToggleElement setDefaultValue(boolean defaultValue) {
-		this.defaultValue = defaultValue;
-		return this;
-	}
-	
-	public boolean getDefaultValue() {
-		return defaultValue;
 	}
 
 	@Override

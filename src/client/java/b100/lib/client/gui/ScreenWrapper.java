@@ -9,7 +9,7 @@ import net.minecraft.text.Text;
 
 public class ScreenWrapper extends Screen {
 
-	public GuiScreen screen;
+	public final GuiScreen screen;
 	
 	private GuiUtils utils = GuiUtils.instance;
 	private boolean screenOpened = true;

@@ -6,6 +6,7 @@ import b100.lib.client.gui.ActionListener;
 import b100.lib.client.gui.GuiElement;
 import b100.lib.client.gui.GuiScreen;
 import b100.lib.client.gui.ListenerList;
+import b100.lib.client.gui.config.base.AbstractButtonOptionElement;
 import net.minecraft.text.Text;
 
 public class CustomOptionElement<E> extends AbstractButtonOptionElement {

@@ -6,7 +6,7 @@ import net.minecraft.text.Text;
 
 public class GuiTextField extends GuiElement implements Focusable {
 
-	public GuiScreen screen;
+	public final GuiScreen screen;
 	
 	private TextFieldWidget widget;
 	

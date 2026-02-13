@@ -4,7 +4,7 @@ import net.minecraft.text.Text;
 
 public class GuiListButton extends GuiElement implements Focusable {
 	
-	public GuiScreen screen;
+	public final GuiScreen screen;
 	
 	private final ListenerList<FocusListener> focusListeners = new ListenerList<>(this);
 	
