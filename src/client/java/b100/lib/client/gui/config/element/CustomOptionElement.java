@@ -1,4 +1,4 @@
-package b100.lib.client.gui.config;
+package b100.lib.client.gui.config.element;
 
 import java.util.function.Function;
 
@@ -6,19 +6,17 @@ import b100.lib.client.gui.ActionListener;
 import b100.lib.client.gui.GuiElement;
 import b100.lib.client.gui.GuiScreen;
 import b100.lib.client.gui.ListenerList;
-import b100.lib.client.gui.config.base.AbstractButtonOptionElement;
+import b100.lib.client.gui.config.base.ButtonOptionElement;
 import net.minecraft.text.Text;
 
-public class CustomOptionElement<E> extends AbstractButtonOptionElement {
+public class CustomOptionElement<E extends Comparable<E>> extends ButtonOptionElement<E> {
 
-	protected E value;
 	protected Function<E, Text> toTextFunction;
 	
 	public final ListenerList<ActionListener> actionListeners = new ListenerList<>(this);
 	
-	public CustomOptionElement(GuiScreen screen, String key, E value) {
-		super(screen, key);
-		this.value = value;
+	public CustomOptionElement(GuiScreen screen, String key, E value, E defaultValue) {
+		super(screen, key, value, defaultValue);
 		
 		update();
 	}

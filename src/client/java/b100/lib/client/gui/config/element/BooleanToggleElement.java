@@ -1,7 +1,5 @@
-package b100.lib.client.gui.config;
+package b100.lib.client.gui.config.element;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -9,29 +7,16 @@ import b100.lib.client.B100LibClient;
 import b100.lib.client.config.BooleanProperty;
 import b100.lib.client.gui.GuiElement;
 import b100.lib.client.gui.GuiScreen;
-import b100.lib.client.gui.config.base.AbstractButtonOptionElement;
-import b100.lib.client.gui.config.base.ConfigElement;
+import b100.lib.client.gui.config.base.ButtonOptionElement;
 import b100.lib.client.util.UpdateMode;
 import net.minecraft.text.Text;
 
-public class BooleanToggleElement extends AbstractButtonOptionElement implements ConfigElement<Boolean> {
+public class BooleanToggleElement extends ButtonOptionElement<Boolean> {
 
-	protected final boolean defaultValue;
-	protected boolean initialValue;
-	protected boolean value;
 	protected Function<Boolean, Text> toTextFunction;
 
-	protected final List<Consumer<Boolean>> updateConsumers = new ArrayList<>();
-	protected final List<Consumer<Boolean>> saveConsumers = new ArrayList<>();
-	
-	public BooleanToggleElement(GuiScreen screen, String key, boolean value) {
-		this(screen, key, value, value);
-	}
-
 	public BooleanToggleElement(GuiScreen screen, String key, boolean value, boolean defaultValue) {
-		super(screen, key);
-		this.value = initialValue = value;
-		this.defaultValue = defaultValue;
+		super(screen, key, value, defaultValue);
 		
 		update();
 	}
@@ -56,36 +41,6 @@ public class BooleanToggleElement extends AbstractButtonOptionElement implements
 		}
 		return Text.of(value ? "\247a" + B100LibClient.trans.asString("value.yes") : "\247c" + B100LibClient.trans.asString("value.no"));
 	}
-
-	@Override
-	public boolean isChanged() {
-		return value != initialValue;
-	}
-
-	@Override
-	public void resetToInitialValue() {
-		value = initialValue;
-	}
-
-	@Override
-	public void resetToDefaultValue() {
-		value = defaultValue;
-	}
-
-	@Override
-	public boolean isDefaultValue() {
-		return value == defaultValue;
-	}
-
-	@Override
-	public void save() {
-		if(initialValue != value) {
-			initialValue = value;
-		}
-		for(Consumer<Boolean> saveConsumer : saveConsumers) {
-			saveConsumer.accept(value);
-		}
-	}
 	
 	public BooleanToggleElement setToTextFunction(Function<Boolean, Text> toTextFunction) {
 		this.toTextFunction = toTextFunction;
@@ -95,24 +50,6 @@ public class BooleanToggleElement extends AbstractButtonOptionElement implements
 	
 	public Function<Boolean, Text> getToTextFunction() {
 		return toTextFunction;
-	}
-
-	public GuiElement addUpdateConsumer(Consumer<Boolean> consumer) {
-		updateConsumers.add(consumer);
-		return this;
-	}
-
-	public boolean removeUpdateConsumer(Consumer<Boolean> consumer) {
-		return updateConsumers.remove(consumer);
-	}
-
-	public GuiElement addSaveConsumer(Consumer<Boolean> consumer) {
-		saveConsumers.add(consumer);
-		return this;
-	}
-
-	public boolean removeSaveConsumer(Consumer<Boolean> consumer) {
-		return saveConsumers.remove(consumer);
 	}
 	
 	////////////////////////////////
