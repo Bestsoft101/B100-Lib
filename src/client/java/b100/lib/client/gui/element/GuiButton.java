@@ -63,7 +63,9 @@ public class GuiButton extends GuiElement implements Focusable {
 	@Override
 	public boolean keyEvent(int key, int scancode, int modifiers, boolean pressed) {
 		if(pressed && focused && (key == GLFW.GLFW_KEY_ENTER || key == GLFW.GLFW_KEY_SPACE)) {
-			clickButton();
+			final boolean shift = (modifiers & GLFW.GLFW_MOD_SHIFT) != 0;
+			
+			clickButton(shift ? 1 : 0);
 			return true;
 		}
 		return false;
@@ -72,14 +74,14 @@ public class GuiButton extends GuiElement implements Focusable {
 	@Override
 	public boolean mouseEvent(int button, boolean pressed, double mouseX, double mouseY) {
 		if(clickable && pressed && screen.isMouseOver(this)) {
-			clickButton();
+			clickButton(button);
 			return true;
 		}
 		
 		return super.mouseEvent(button, pressed, mouseX, mouseY);
 	}
 	
-	public void clickButton() {
+	public void clickButton(int mouseButton) {
 		utils.playSound(SoundEvents.UI_BUTTON_CLICK);
 		actionListeners.forEach((listener) -> listener.actionPerformed(this));
 	}

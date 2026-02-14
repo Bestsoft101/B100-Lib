@@ -34,11 +34,11 @@ public class SaveConfigButton extends GuiButton implements ConfigElementListener
 	}
 	
 	@Override
-	public void clickButton() {
+	public void clickButton(int button) {
 		for(ConfigElement<?> configElement : changedConfigElements) {
 			configElement.save();
 		}
-		super.clickButton();
+		super.clickButton(button);
 	}
 
 }

@@ -5,7 +5,6 @@ import java.util.function.Function;
 
 import b100.lib.client.gui.config.base.ButtonOptionElement;
 import b100.lib.client.gui.config.base.ConfigElement;
-import b100.lib.client.gui.element.GuiElement;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.util.UpdateMode;
 import b100.lib.config.property.EnumProperty;
@@ -25,8 +24,8 @@ public class EnumToggleElement<E extends Enum<E>> extends ButtonOptionElement<E>
 	}
 
 	@Override
-	public void actionPerformed(GuiElement element) {
-		value = getNextValue(value);
+	public void onClick(int mouseButton) {
+		value = getNextValue(value, mouseButton == 1 ? -1 : 1);
 
 		configElementListeners.forEach(listener -> listener.valueChanged(this));
 		
@@ -37,11 +36,11 @@ public class EnumToggleElement<E extends Enum<E>> extends ButtonOptionElement<E>
 		update();
 	}
 	
-	protected E getNextValue(E value) {
+	protected E getNextValue(E value, int direction) {
 		E[] allValues = type.getEnumConstants();
 		for(int i=0; i < allValues.length; i++) {
 			if(allValues[i] == value) {
-				return allValues[(i + 1) % allValues.length];
+				return allValues[(i + direction + allValues.length) % allValues.length];
 			}
 		}
 		return allValues[0];

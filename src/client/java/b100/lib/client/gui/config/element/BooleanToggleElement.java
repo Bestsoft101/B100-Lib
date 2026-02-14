@@ -5,7 +5,6 @@ import java.util.function.Function;
 
 import b100.lib.client.B100LibClient;
 import b100.lib.client.gui.config.base.ButtonOptionElement;
-import b100.lib.client.gui.element.GuiElement;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.util.UpdateMode;
 import b100.lib.config.property.BooleanProperty;
@@ -22,7 +21,7 @@ public class BooleanToggleElement extends ButtonOptionElement<Boolean> {
 	}
 	
 	@Override
-	public void actionPerformed(GuiElement source) {
+	public void onClick(int mouseButton) {
 		value = !value;
 		
 		configElementListeners.forEach(listener -> listener.valueChanged(this));
