@@ -8,6 +8,7 @@ import b100.lib.client.gui.element.Focusable;
 import b100.lib.client.gui.element.GuiContainer;
 import b100.lib.client.gui.element.GuiElement;
 import b100.lib.client.gui.screen.GuiScreen;
+import b100.lib.client.gui.util.GuiColors;
 import b100.lib.client.gui.util.ListenerList;
 import b100.lib.client.translate.Translations;
 import net.minecraft.text.Text;
@@ -58,6 +59,10 @@ public abstract class OptionElement<T extends Comparable<T>, E extends GuiElemen
 	
 	protected abstract E createOptionElement();
 	
+	public abstract boolean isEnabled();
+	
+	public abstract void setEnabled(boolean enabled);
+	
 	protected void initOptionElement(E element) {
 		optionElement.setSize(112, 20);
 		add(optionElement);
@@ -76,17 +81,30 @@ public abstract class OptionElement<T extends Comparable<T>, E extends GuiElemen
 		GuiElement mouseOver = screen.getMouseOver();
 		E element = getOptionElement();
 		
-		if(mouseOver == this || contains(mouseOver) || Focusable.isFocused(element)) {
-			utils.drawRectangle(posX, posY, width, height, 0x20FFFFFF);
+		int textColor;
+		boolean textShadow;
+		
+		if(isEnabled()) {
+			textColor = GuiColors.INSTANCE.defaultText;
+			textShadow = true;
 			
-			if(tooltipText != null) {
-				screen.drawWrappedTooltip(tooltipText);
-			}
+			if(mouseOver == this || contains(mouseOver) || Focusable.isFocused(element)) {
+				utils.drawRectangle(posX, posY, width, height, GuiColors.INSTANCE.optionsElementBackground);
+				
+				if(tooltipText != null) {
+					screen.drawWrappedTooltip(tooltipText);
+				}
+				
+				textColor = GuiColors.INSTANCE.hoveredText;
+			}	
+		}else {
+			textColor = GuiColors.INSTANCE.disabledText;
+			textShadow = false;
 		}
 		
 		super.draw();
 		
-		utils.drawString(name, posX + 8, posY + height / 2 - 4, 0xFFFFFF, true);
+		utils.drawString(name, posX + 8, posY + height / 2 - 4, textColor, textShadow);
 	}
 	
 	@Override

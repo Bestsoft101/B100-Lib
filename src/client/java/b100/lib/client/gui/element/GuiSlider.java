@@ -5,6 +5,7 @@ import org.lwjgl.glfw.GLFW;
 import b100.lib.client.gui.listener.FocusListener;
 import b100.lib.client.gui.listener.SliderListener;
 import b100.lib.client.gui.screen.GuiScreen;
+import b100.lib.client.gui.util.GuiColors;
 import b100.lib.client.gui.util.ListenerList;
 import b100.lib.client.gui.util.Textures;
 import net.minecraft.sound.SoundEvents;
@@ -69,8 +70,13 @@ public abstract class GuiSlider<T> extends GuiElement implements Focusable {
 		final boolean mouseOver = screen.isMouseOver(this);
 		
 		Identifier backgroundTexture, handleTexture;
+		int textColor;
+		boolean textShadow;
 		
 		if(slideable) {
+			textColor = GuiColors.INSTANCE.defaultText;
+			textShadow = true;
+			
 			if(focused && !selected) {
 				backgroundTexture = Textures.INSTANCE.sliderHighlighted;
 			}else {
@@ -83,6 +89,9 @@ public abstract class GuiSlider<T> extends GuiElement implements Focusable {
 				handleTexture = Textures.INSTANCE.sliderHandle;
 			}
 		}else {
+			textColor = GuiColors.INSTANCE.disabledText;
+			textShadow = false;
+			
 			backgroundTexture = Textures.INSTANCE.sliderNormal;
 			handleTexture = Textures.INSTANCE.sliderHandle;
 		}
@@ -94,7 +103,7 @@ public abstract class GuiSlider<T> extends GuiElement implements Focusable {
 		int handlePos = posX + (int) (floatValue * (width - HANDLE_WIDTH));
 		utils.drawGuiTexture(handleTexture, handlePos, posY, HANDLE_WIDTH, height);
 		
-		utils.drawCenteredString(getText(value), posX + width / 2, posY + height / 2 - 4, 0xFFFFFF, true);
+		utils.drawCenteredString(getText(value), posX + width / 2, posY + height / 2 - 4, textColor, textShadow);
 	}
 	
 	@Override
@@ -131,8 +140,8 @@ public abstract class GuiSlider<T> extends GuiElement implements Focusable {
 		return false;
 	}
 	
-	public void setSlideable(boolean editable) {
-		this.slideable = editable;
+	public void setSlideable(boolean slideable) {
+		this.slideable = slideable;
 	}
 	
 	public boolean isSlideable() {

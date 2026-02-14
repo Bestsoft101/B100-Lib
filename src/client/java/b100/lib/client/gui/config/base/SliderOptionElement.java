@@ -17,4 +17,14 @@ public abstract class SliderOptionElement<T extends Comparable<T>> extends Optio
 		element.sliderListeners.add(this);
 	}
 	
+	@Override
+	public boolean isEnabled() {
+		return getOptionElement().isSlideable();
+	}
+	
+	@Override
+	public void setEnabled(boolean enabled) {
+		getOptionElement().setSlideable(enabled);
+	}
+	
 }

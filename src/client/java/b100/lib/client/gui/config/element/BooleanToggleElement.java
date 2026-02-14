@@ -38,7 +38,19 @@ public class BooleanToggleElement extends ButtonOptionElement<Boolean> {
 		if(toTextFunction != null) {
 			return toTextFunction.apply(value);	
 		}
-		return Text.of(value ? "\247a" + B100LibClient.trans.asString("value.yes") : "\247c" + B100LibClient.trans.asString("value.no"));
+		
+		String color;
+		if(isEnabled()) {
+			if(value) {
+				color = "\247a";
+			}else {
+				color = "\247c";
+			}
+		}else {
+			color = "";
+		}
+		
+		return Text.of(value ? color + B100LibClient.trans.asString("value.yes") : color + B100LibClient.trans.asString("value.no"));
 	}
 	
 	public BooleanToggleElement setToTextFunction(Function<Boolean, Text> toTextFunction) {

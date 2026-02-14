@@ -5,6 +5,7 @@ import org.lwjgl.glfw.GLFW;
 import b100.lib.client.gui.listener.ActionListener;
 import b100.lib.client.gui.listener.FocusListener;
 import b100.lib.client.gui.screen.GuiScreen;
+import b100.lib.client.gui.util.GuiColors;
 import b100.lib.client.gui.util.ListenerList;
 import b100.lib.client.gui.util.Textures;
 import net.minecraft.sound.SoundEvents;
@@ -39,14 +40,23 @@ public class GuiButton extends GuiElement implements Focusable {
 	@Override
 	public void draw() {
 		Identifier texture;
+		int textColor;
+		boolean textShadow;
 		
 		if(clickable) {
+			textColor = GuiColors.INSTANCE.defaultText;
+			textShadow = true;
+			
 			if(focused || screen.isMouseOver(this)) {
+				textColor = GuiColors.INSTANCE.hoveredText;
 				texture = Textures.INSTANCE.buttonHover;
 			}else {
 				texture = Textures.INSTANCE.buttonNormal;
 			}
 		}else {
+			textColor = GuiColors.INSTANCE.disabledText;
+			textShadow = false;
+			
 			texture = Textures.INSTANCE.buttonDisabled;
 		}
 		
@@ -56,7 +66,7 @@ public class GuiButton extends GuiElement implements Focusable {
 			int textWidth = utils.textRenderer.getWidth(text);
 			int textX = posX + (width - textWidth) / 2;
 			int textY = posY + height / 2 - 4;
-			utils.drawString(text, textX, textY, 0xFFFFFF, true);
+			utils.drawString(text, textX, textY, textColor, textShadow);
 		}
 	}
 	

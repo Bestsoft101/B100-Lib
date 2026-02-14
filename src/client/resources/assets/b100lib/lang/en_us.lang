@@ -19,3 +19,7 @@ b100lib.option.test.integer.slider=Integer Slider
 b100lib.option.test.float.slider=Float Slider
 b100lib.option.test.enum.toggle=Enum Toggle
 b100lib.option.test.enum.slider=Enum Slider
+
+b100lib.option.test.disabled.button=Disabled Button
+b100lib.option.test.disabled.slider=Disabled Slider
+b100lib.option.test.disabled.textField=Disabled Text Field

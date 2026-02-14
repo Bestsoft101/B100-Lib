@@ -27,6 +27,16 @@ public abstract class ButtonOptionElement<T extends Comparable<T>> extends Optio
 		};
 	}
 	
+	@Override
+	public boolean isEnabled() {
+		return getOptionElement().isClickable();
+	}
+	
+	@Override
+	public void setEnabled(boolean enabled) {
+		getOptionElement().setClickable(enabled);
+	}
+	
 	protected abstract void onClick(int mouseButton);
 	
 	public abstract Text getButtonText();

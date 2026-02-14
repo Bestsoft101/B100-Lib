@@ -52,6 +52,18 @@ public class IntegerTextFieldElement extends OptionElement<Integer, GuiTextField
 		}
 	}
 	
+	@Override
+	public boolean isEnabled() {
+		return getOptionElement().isEditable();
+	}
+	
+	@Override
+	public void setEnabled(boolean enabled) {
+		GuiTextField textField = getOptionElement();
+		textField.setEditable(enabled);
+		textField.setFocusable(enabled);
+	}
+	
 	////////////////////////////////
 	
 	public static IntegerTextFieldElement create(GuiScreen screen, String key, IntProperty property, UpdateMode updateMode) {

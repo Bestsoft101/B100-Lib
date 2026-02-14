@@ -36,6 +36,10 @@ class ConfigElementTestScreen extends GuiScrollListScreen {
 	public static EnumProperty<TestEnum> enumProperty1 = config.register("enumProperty1", EnumProperty.create(TestEnum.class));
 	public static EnumProperty<TestEnum> enumProperty2 = config.register("enumProperty2", EnumProperty.create(TestEnum.class));
 	public static FloatProperty floatProperty = config.register("floatProperty", FloatProperty.create(0.25f));
+
+	public static BooleanProperty disabledBooleanProperty = BooleanProperty.create(false);
+	public static IntProperty disabledIntProperty = IntProperty.create(0);
+	public static FloatProperty disabledFloatProperty = FloatProperty.create(0.0f);
 	
 	static {
 		config.load();
@@ -79,6 +83,18 @@ class ConfigElementTestScreen extends GuiScrollListScreen {
 		scrollList.add(FloatSliderElement.create(this, "b100lib.option.test.float.slider", floatProperty, UpdateMode.ON_SAVE));
 		scrollList.add(EnumToggleElement.create(this, "b100lib.option.test.enum.toggle", enumProperty1, UpdateMode.ON_SAVE));
 		scrollList.add(EnumSliderElement.create(this, "b100lib.option.test.enum.slider", enumProperty2, UpdateMode.ON_SAVE));
+
+		BooleanToggleElement e0 = BooleanToggleElement.create(this, "b100lib.option.test.disabled.button", disabledBooleanProperty, UpdateMode.ON_SAVE);
+		e0.setEnabled(false);
+		scrollList.add(e0);
+		
+		FloatSliderElement e1 = FloatSliderElement.create(this, "b100lib.option.test.disabled.slider", disabledFloatProperty, UpdateMode.ON_SAVE);
+		e1.setEnabled(false);
+		scrollList.add(e1);
+		
+		IntegerTextFieldElement e2 = IntegerTextFieldElement.create(this, "b100lib.option.test.disabled.textField", disabledIntProperty, UpdateMode.ON_SAVE);
+		e2.setEnabled(false);
+		scrollList.add(e2);
 	}
 	
 	@Override

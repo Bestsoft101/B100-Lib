@@ -4,6 +4,7 @@ import b100.lib.client.access.TextFieldWidgetAccess;
 import b100.lib.client.gui.listener.ActionListener;
 import b100.lib.client.gui.listener.FocusListener;
 import b100.lib.client.gui.screen.GuiScreen;
+import b100.lib.client.gui.util.GuiColors;
 import b100.lib.client.gui.util.ListenerList;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.text.Text;
@@ -26,6 +27,8 @@ public class GuiTextField extends GuiElement implements Focusable {
 		
 		widget = new TextFieldWidget(utils.textRenderer, 200, 20, text);
 		widget.setChangedListener(this::textChanged);
+		widget.setEditableColor(GuiColors.INSTANCE.defaultText);
+		widget.setUneditableColor(GuiColors.INSTANCE.disabledText);
 		
 		width = 200;
 		height = 20;
