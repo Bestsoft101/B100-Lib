@@ -14,7 +14,7 @@ public class SaveConfigButton extends GuiButton implements ConfigElementListener
 	private final Set<ConfigElement<?>> changedConfigElements = new HashSet<>();
 	
 	public SaveConfigButton(GuiScreen screen) {
-		super(screen, B100LibClient.trans.asText("button.saveAndQuit"));
+		super(screen, B100LibClient.TRANS.asText("button.saveAndQuit"));
 		
 		setActive(false);
 	}

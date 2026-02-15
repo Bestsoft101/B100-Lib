@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import b100.lib.Print;
+import b100.lib.config.properties.PropertiesUtil;
 import b100.lib.util.ConfigUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.LanguageManager;
@@ -60,7 +61,7 @@ public class Translate {
 				return;
 			}
 			
-			ConfigUtil.loadConfig(stream, translations::put, '=');	
+			ConfigUtil.loadConfig(stream, (key, value) -> translations.put(key, PropertiesUtil.deescapeString(value)), '=');	
 		}catch (Exception e) {
 			throw new RuntimeException("Loading language: " + languageName, e);
 		}

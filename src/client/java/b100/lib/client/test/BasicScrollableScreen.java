@@ -19,7 +19,7 @@ abstract class BasicScrollableScreen extends GuiScrollListScreen {
 	protected void onInit() {
 		super.onInit();
 		
-		doneButton = add(new GuiButton(this, B100LibClient.trans.asText("button.done")));
+		doneButton = add(new GuiButton(this, B100LibClient.TRANS.asText("button.done")));
 		doneButton.addActionListener((e) -> back());
 		
 		scrollList.layout = new ListLayout().setInnerPadding(getInnerPadding()).setOuterPadding(getOuterPadding()).setAlign(getAlign());

@@ -14,26 +14,26 @@ class TestScreen extends BasicScrollableScreen {
 	protected void onInit() {
 		super.onInit();
 		
-		title = B100LibClient.trans.asText("screen.gui_demo");
+		title = B100LibClient.TRANS.asText("screen.gui_demo");
 	}
 	
 	@Override
 	public void initScrollElements() {
 		GuiButton button;
 		
-		button = new GuiButton(this, B100LibClient.trans.asText("screen.buttons"));
+		button = new GuiButton(this, B100LibClient.TRANS.asText("screen.buttons"));
 		button.addActionListener((e) -> utils.setScreen(new ButtonTestScreen(this)));
 		scrollList.add(button);
 		
-		button = new GuiButton(this, B100LibClient.trans.asText("screen.miscElements"));
+		button = new GuiButton(this, B100LibClient.TRANS.asText("screen.miscElements"));
 		button.addActionListener((e) -> utils.setScreen(new MiscElementsTestScreen(this)));
 		scrollList.add(button);
 		
-		button = new GuiButton(this, B100LibClient.trans.asText("screen.translations"));
+		button = new GuiButton(this, B100LibClient.TRANS.asText("screen.translations"));
 		button.addActionListener((e) -> utils.setScreen(new SelectTranslationFileScreen(this)));
 		scrollList.add(button);
 		
-		button = new GuiButton(this, B100LibClient.trans.asText("screen.configTest"));
+		button = new GuiButton(this, B100LibClient.TRANS.asText("screen.configTest"));
 		button.addActionListener((e) -> utils.setScreen(new ConfigElementTestScreen(this)));
 		scrollList.add(button);
 	}

@@ -20,4 +20,12 @@ public class Print {
 			LOGGER.info("[B100Lib] " + str);
 		}
 	}
+	
+	public static void printError(String str) {
+		if(B100Lib.INDEV) {
+			System.out.print("[B100Lib-ERROR] " + str + "\n");
+		}else {
+			LOGGER.error(str);
+		}
+	}
 }

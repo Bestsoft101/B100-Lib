@@ -20,7 +20,8 @@ import b100.lib.client.gui.element.GuiScrollableList.ListLayout;
 import b100.lib.client.gui.screen.GuiScrollListScreen;
 import b100.lib.client.mixin.IScreen;
 import b100.lib.client.util.UpdateMode;
-import b100.lib.config.Config;
+import b100.lib.config.properties.DetailedPropertiesWriter;
+import b100.lib.config.properties.PropertiesFile;
 import b100.lib.config.property.BooleanProperty;
 import b100.lib.config.property.EnumProperty;
 import b100.lib.config.property.FloatProperty;
@@ -28,46 +29,45 @@ import b100.lib.config.property.IntProperty;
 
 class ConfigElementTestScreen extends GuiScrollListScreen {
 	
-	public static Config config = new Config(new File(B100Lib.CONFIG_FOLDER, B100Lib.MODID + "_config_demo.properties"));
+	public final PropertiesFile properties = new PropertiesFile(new File(B100Lib.CONFIG_FOLDER, B100Lib.MODID + "_config_demo.properties"));
 
-	public static BooleanProperty booleanProperty = config.register("booleanProperty", BooleanProperty.create(false));
-	public static IntProperty intProperty = config.register("intProperty", IntProperty.create(100));
-	public static IntProperty intSliderProperty = config.register("intSliderProperty", IntProperty.create(0));
-	public static EnumProperty<TestEnum> enumProperty1 = config.register("enumProperty1", EnumProperty.create(TestEnum.class));
-	public static EnumProperty<TestEnum> enumProperty2 = config.register("enumProperty2", EnumProperty.create(TestEnum.class));
-	public static FloatProperty floatProperty = config.register("floatProperty", FloatProperty.create(0.25f));
+	public final BooleanProperty booleanToggle = properties.add("booleanToggle", BooleanProperty.create(false));
+	public final IntProperty intTextField = properties.add("intTextField", IntProperty.create(100));
+	public final IntProperty intSlider = properties.add("intSlider", IntProperty.create(1));
+	public final FloatProperty floatSlider = properties.add("floatSlider", FloatProperty.create(0.25f));
+	public final EnumProperty<TestEnum> enumToggle = properties.add("enumToggle", EnumProperty.create(TestEnum.class));
+	public final EnumProperty<TestEnum> enumSlider = properties.add("enumSlider", EnumProperty.create(TestEnum.class));
 
-	public static BooleanProperty disabledBooleanProperty = BooleanProperty.create(false);
-	public static IntProperty disabledIntProperty = IntProperty.create(0);
-	public static FloatProperty disabledFloatProperty = FloatProperty.create(0.0f);
+	public final BooleanProperty disabledBooleanToggle = BooleanProperty.create(false);
+	public final IntProperty disabledIntTextField = IntProperty.create(0);
+	public final FloatProperty disabledFloatSlider = FloatProperty.create(0.0f);
 	
-	static {
-		config.load();
-	}
-	
-	////////////////////////////////
-
 	protected GuiButton cancelButton;
 	protected SaveConfigButton saveConfigButton;
 	
 	public ConfigElementTestScreen(IScreen parentScreen) {
 		super(parentScreen);
 		
-		title = B100LibClient.trans.asText("screen.configTest");
+		title = B100LibClient.TRANS.asText("screen.configTest");
+		
+		properties.setWriter(new DetailedPropertiesWriter(properties).setCommentProvider(key -> B100LibClient.TRANS.asStringOrNull("configDemo." + key + ".tooltip")));
+		
+		Print.print("Load: " + properties.getFile().getAbsolutePath());
+		properties.load();
 	}
 	
 	@Override
 	protected void onInit() {
 		saveConfigButton = new SaveConfigButton(this);
 		saveConfigButton.addActionListener(source -> {
-			Print.print("Save: " + config.configFile.getAbsolutePath());
-			config.save();
+			Print.print("Save: " + properties.getFile().getAbsolutePath());
+			properties.save();
 			back();
 		});
 		
 		super.onInit();
 		
-		cancelButton = add(new GuiButton(this, B100LibClient.trans.asText("button.cancel")));
+		cancelButton = add(new GuiButton(this, B100LibClient.TRANS.asText("button.cancel")));
 		cancelButton.addActionListener((e) -> back());
 		
 		add(saveConfigButton);
@@ -77,22 +77,22 @@ class ConfigElementTestScreen extends GuiScrollListScreen {
 
 	@Override
 	public void initScrollElements() {
-		scrollList.add(BooleanToggleElement.create(this, "b100lib.option.test.boolean.toggle", booleanProperty, UpdateMode.ON_SAVE));
-		scrollList.add(IntegerTextFieldElement.create(this, "b100lib.option.test.integer.textField", intProperty, UpdateMode.ON_SAVE));
-		scrollList.add(IntegerSliderElement.create(this, "b100lib.option.test.integer.slider", 1, 5, intSliderProperty, UpdateMode.ON_SAVE));
-		scrollList.add(FloatSliderElement.create(this, "b100lib.option.test.float.slider", floatProperty, UpdateMode.ON_SAVE));
-		scrollList.add(EnumToggleElement.create(this, "b100lib.option.test.enum.toggle", enumProperty1, UpdateMode.ON_SAVE));
-		scrollList.add(EnumSliderElement.create(this, "b100lib.option.test.enum.slider", enumProperty2, UpdateMode.ON_SAVE));
+		scrollList.add(BooleanToggleElement.create(this, "b100lib.configDemo.booleanToggle", booleanToggle, UpdateMode.ON_SAVE));
+		scrollList.add(IntegerTextFieldElement.create(this, "b100lib.configDemo.intTextField", intTextField, UpdateMode.ON_SAVE));
+		scrollList.add(IntegerSliderElement.create(this, "b100lib.configDemo.intSlider", 1, 5, intSlider, UpdateMode.ON_SAVE));
+		scrollList.add(FloatSliderElement.create(this, "b100lib.configDemo.floatSlider", floatSlider, UpdateMode.ON_SAVE));
+		scrollList.add(EnumToggleElement.create(this, "b100lib.configDemo.enumToggle", enumToggle, UpdateMode.ON_SAVE));
+		scrollList.add(EnumSliderElement.create(this, "b100lib.configDemo.enumSlider", enumSlider, UpdateMode.ON_SAVE));
 
-		BooleanToggleElement e0 = BooleanToggleElement.create(this, "b100lib.option.test.disabled.button", disabledBooleanProperty, UpdateMode.ON_SAVE);
+		BooleanToggleElement e0 = BooleanToggleElement.create(this, "b100lib.configDemo.disabledBooleanToggle", disabledBooleanToggle, UpdateMode.ON_SAVE);
 		e0.setEnabled(false);
 		scrollList.add(e0);
 		
-		FloatSliderElement e1 = FloatSliderElement.create(this, "b100lib.option.test.disabled.slider", disabledFloatProperty, UpdateMode.ON_SAVE);
+		FloatSliderElement e1 = FloatSliderElement.create(this, "b100lib.configDemo.disabledFloatSlider", disabledFloatSlider, UpdateMode.ON_SAVE);
 		e1.setEnabled(false);
 		scrollList.add(e1);
 		
-		IntegerTextFieldElement e2 = IntegerTextFieldElement.create(this, "b100lib.option.test.disabled.textField", disabledIntProperty, UpdateMode.ON_SAVE);
+		IntegerTextFieldElement e2 = IntegerTextFieldElement.create(this, "b100lib.configDemo.disabledIntTextField", disabledIntTextField, UpdateMode.ON_SAVE);
 		e2.setEnabled(false);
 		scrollList.add(e2);
 	}

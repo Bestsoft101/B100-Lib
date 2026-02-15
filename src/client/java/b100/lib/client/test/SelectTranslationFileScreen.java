@@ -20,7 +20,7 @@ class SelectTranslationFileScreen extends BasicScrollableScreen {
 	protected void onInit() {
 		super.onInit();
 		
-		title = B100LibClient.trans.asText("screen.translations");
+		title = B100LibClient.TRANS.asText("screen.translations");
 	}
 	
 	@Override

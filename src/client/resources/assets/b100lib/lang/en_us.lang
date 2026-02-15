@@ -13,13 +13,20 @@ b100lib.screen.configTest=Config Elements
 b100lib.value.yes=Yes
 b100lib.value.no=No
 
-b100lib.option.test.boolean.toggle=Boolean Toggle
-b100lib.option.test.integer.textField=Integer Text Field
-b100lib.option.test.integer.slider=Integer Slider
-b100lib.option.test.float.slider=Float Slider
-b100lib.option.test.enum.toggle=Enum Toggle
-b100lib.option.test.enum.slider=Enum Slider
+b100lib.configDemo.booleanToggle=Boolean Toggle
 
-b100lib.option.test.disabled.button=Disabled Button
-b100lib.option.test.disabled.slider=Disabled Slider
-b100lib.option.test.disabled.textField=Disabled Text Field
+b100lib.configDemo.intTextField=Integer Text Field
+
+b100lib.configDemo.intSlider=Integer Slider
+b100lib.configDemo.intSlider.tooltip=This is a comment!
+
+b100lib.configDemo.floatSlider=Float Slider
+b100lib.configDemo.floatSlider.tooltip=This is a multi-\nline comment!
+
+b100lib.configDemo.enumToggle=Enum Toggle
+
+b100lib.configDemo.enumSlider=Enum Slider
+
+b100lib.configDemo.disabledBooleanToggle=Disabled Button
+b100lib.configDemo.disabledIntTextField=Disabled Slider
+b100lib.configDemo.disabledFloatSlider=Disabled Text Field

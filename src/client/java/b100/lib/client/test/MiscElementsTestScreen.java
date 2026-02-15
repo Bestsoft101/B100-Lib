@@ -18,7 +18,7 @@ class MiscElementsTestScreen extends BasicScrollableScreen {
 	protected void onInit() {
 		super.onInit();
 		
-		title = B100LibClient.trans.asText("screen.miscElements");
+		title = B100LibClient.TRANS.asText("screen.miscElements");
 	}
 
 	@Override

@@ -15,7 +15,7 @@ class ButtonTestScreen extends BasicScrollableScreen {
 	protected void onInit() {
 		super.onInit();
 
-		title = B100LibClient.trans.asText("screen.buttons");
+		title = B100LibClient.TRANS.asText("screen.buttons");
 	}
 
 	@Override

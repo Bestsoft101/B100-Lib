@@ -22,7 +22,7 @@ public class EnumSliderElement<E extends Enum<E>> extends SliderOptionElement<E>
 
 	@Override
 	protected GuiSlider<E> createOptionElement() {
-		return new GuiEnumSlider<E>(screen, type, defaultValue);
+		return new GuiEnumSlider<E>(screen, type, value);
 	}
 
 	@Override

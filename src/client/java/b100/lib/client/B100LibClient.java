@@ -10,7 +10,7 @@ public class B100LibClient implements ClientModInitializer {
 		Translations.loadFromNamespace(B100Lib.MODID);
 	}
 
-	public static Translations trans = Translations.get("b100lib.");
+	public static final Translations TRANS = Translations.get(B100Lib.MODID + ".");
 	
 	@Override
 	public void onInitializeClient() {
