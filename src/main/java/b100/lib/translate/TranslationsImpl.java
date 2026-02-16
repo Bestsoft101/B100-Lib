@@ -1,4 +1,4 @@
-package b100.lib.client.translate;
+package b100.lib.translate;
 
 import net.minecraft.text.Text;
 

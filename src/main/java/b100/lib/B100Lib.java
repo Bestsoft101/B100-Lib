@@ -3,6 +3,7 @@ package b100.lib;
 import java.io.File;
 import java.nio.file.Paths;
 
+import b100.lib.translate.Translate;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 
@@ -16,5 +17,7 @@ public class B100Lib implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		Print.print("Is Development Environment: " + INDEV);
+		
+		Translate.loadAllTranslations("en_us");
 	}
 }

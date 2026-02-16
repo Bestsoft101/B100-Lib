@@ -9,7 +9,7 @@ import java.util.Map;
 import b100.lib.client.gui.element.GuiListButton;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.mixin.IScreen;
-import b100.lib.client.translate.Translate;
+import b100.lib.translate.Translate;
 import b100.lib.util.ConfigUtil;
 import net.minecraft.client.font.MultilineText;
 import net.minecraft.text.Text;

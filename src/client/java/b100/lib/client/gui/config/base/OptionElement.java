@@ -10,7 +10,7 @@ import b100.lib.client.gui.element.GuiElement;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.util.GuiColors;
 import b100.lib.client.gui.util.ListenerList;
-import b100.lib.client.translate.Translations;
+import b100.lib.translate.Translations;
 import net.minecraft.text.Text;
 
 public abstract class OptionElement<T extends Comparable<T>, E extends GuiElement> extends GuiContainer implements ConfigElement<T> {

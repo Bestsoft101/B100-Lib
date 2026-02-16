@@ -7,7 +7,7 @@ import java.util.Set;
 import b100.lib.client.B100LibClient;
 import b100.lib.client.gui.element.GuiButton;
 import b100.lib.client.mixin.IScreen;
-import b100.lib.client.translate.Translate;
+import b100.lib.translate.Translate;
 import net.minecraft.text.Text;
 
 class SelectTranslationFileScreen extends BasicScrollableScreen {
@@ -25,7 +25,7 @@ class SelectTranslationFileScreen extends BasicScrollableScreen {
 	
 	@Override
 	public void initScrollElements() {
-		String currentLanguage = Translate.getCurrentLanguage();
+		String currentLanguage = B100LibClient.getCurrentLanguage();
 		Set<String> paths = Translate.getAllLanguageFilePaths(currentLanguage);
 		if(!currentLanguage.equals("en_us")) {
 			paths.addAll(Translate.getAllLanguageFilePaths("en_us"));
