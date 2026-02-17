@@ -4,6 +4,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import b100.lib.util.ConfigStringifiable;
+
 public interface Property<E> {
 	
 	public E get();
@@ -19,35 +21,13 @@ public interface Property<E> {
 	////////////////////////////////
 	
 	public static <E> Property<E> create(final E defaultValue, Function<String, E> parser, Function<E, String> toString) {
-		Property<E> prop = new Property<E>() {
-			E value;
-			
-			@Override
-			public E get() {
-				return value;
-			}
-
-			@Override
-			public void set(E value) {
-				this.value = value;
-			}
-
-			@Override
-			public E getDefaultValue() {
-				return defaultValue;
-			}
-
-			@Override
-			public void parse(String value) {
-				parser.apply(value);
-			}
-
-			@Override
-			public String stringValue() {
-				return toString.apply(get());
-			}
-		};
-		return prop;
+		return new PropertyImpl<E>(defaultValue, toString, parser);
+	}
+	
+	public static <E extends ConfigStringifiable> PropertyImpl<E> create(E defaultValue, Function<String, E> parseFunction) {
+		Function<E, String> toString = value -> value != null ? value.toConfigString() : null;
+		
+		return new PropertyImpl<E>(defaultValue, toString, parseFunction);
 	}
 	
 	public static <E> Property<E> create(final E defaultValue, Supplier<E> get, Consumer<E> set, Function<String, E> parser, Function<E, String> toString) {
