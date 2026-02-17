@@ -14,6 +14,10 @@ public class CustomOptionElement<E> extends ButtonOptionElement<E> {
 	
 	public final ListenerList<ActionListener> actionListeners = new ListenerList<>(this);
 	
+	public CustomOptionElement(GuiScreen screen, String key, E value) {
+		this(screen, key, value, value);
+	}
+	
 	public CustomOptionElement(GuiScreen screen, String key, E value, E defaultValue) {
 		super(screen, key, value, defaultValue);
 		
