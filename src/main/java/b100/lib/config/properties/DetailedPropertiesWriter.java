@@ -15,6 +15,11 @@ public class DetailedPropertiesWriter extends PropertiesWriter {
 	
 	@Override
 	protected void writeEntry(Entry entry, FileWriter fileWriter) throws IOException {
+		String value = entry.property.stringValue();
+		if(value == null) {
+			return;
+		}
+		
 		String comment = commentProvider.apply(entry.key);
 		if(comment != null) {
 			String[] lines = comment.split("\n");
@@ -30,9 +35,14 @@ public class DetailedPropertiesWriter extends PropertiesWriter {
 				fileWriter.write('\n');
 			}
 		}
+
+		fileWriter.write(entry.key);
+		fileWriter.write(':');
 		
-		super.writeEntry(entry, fileWriter);
+		value = escapeString(value);
 		
+		fileWriter.write(value);
+		fileWriter.write('\n');
 		fileWriter.write('\n');
 	}
 	
