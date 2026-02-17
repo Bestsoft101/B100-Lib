@@ -20,14 +20,12 @@ public interface Property<E> {
 	
 	////////////////////////////////
 	
-	public static <E> Property<E> create(final E defaultValue, Function<String, E> parser, Function<E, String> toString) {
+	public static <E> PropertyImpl<E> create(final E defaultValue, Function<String, E> parser, Function<E, String> toString) {
 		return new PropertyImpl<E>(defaultValue, toString, parser);
 	}
 	
 	public static <E extends ConfigStringifiable> PropertyImpl<E> create(E defaultValue, Function<String, E> parseFunction) {
-		Function<E, String> toString = value -> value != null ? value.toConfigString() : null;
-		
-		return new PropertyImpl<E>(defaultValue, toString, parseFunction);
+		return new PropertyImpl<E>(defaultValue, ConfigStringifiable::toConfigStringOrNull, parseFunction);
 	}
 	
 	public static <E> Property<E> create(final E defaultValue, Supplier<E> get, Consumer<E> set, Function<String, E> parser, Function<E, String> toString) {

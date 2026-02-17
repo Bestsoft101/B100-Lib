@@ -1,5 +1,9 @@
 package b100.lib.config.property;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class PropertyImpl<E> implements Property<E> {
@@ -10,6 +14,8 @@ public class PropertyImpl<E> implements Property<E> {
 	
 	protected Function<E, String> toString;
 	protected Function<String, E> parser;
+	
+	protected final List<Consumer<E>> valueChangeListeners = new ArrayList<>();
 	
 	public PropertyImpl(E defaultValue, Function<E, String> toString, Function<String, E> parseFunction) {
 		this.defaultValue = this.value = defaultValue;
@@ -29,7 +35,16 @@ public class PropertyImpl<E> implements Property<E> {
 
 	@Override
 	public void set(E value) {
-		this.value = value;
+		if(!Objects.equals(this.value, value)) {
+			this.value = value;
+			onValueChange(value);
+		}
+	}
+	
+	protected void onValueChange(E value) {
+		for(Consumer<E> listener : valueChangeListeners) {
+			listener.accept(value);
+		}
 	}
 
 	@Override
@@ -39,7 +54,7 @@ public class PropertyImpl<E> implements Property<E> {
 
 	@Override
 	public void parse(String value) {
-		this.value = parser.apply(value);
+		set(parser.apply(value));
 	}
 
 	@Override
@@ -61,6 +76,15 @@ public class PropertyImpl<E> implements Property<E> {
 	
 	public void setToStringFunction(Function<E, String> toString) {
 		this.toString = toString;
+	}
+	
+	public PropertyImpl<E> addValueChangeListener(Consumer<E> listener) {
+		valueChangeListeners.add(listener);
+		return this;
+	}
+	
+	public boolean removeValueChangeListener(Consumer<E> listener) {
+		return valueChangeListeners.remove(listener);
 	}
 	
 }
