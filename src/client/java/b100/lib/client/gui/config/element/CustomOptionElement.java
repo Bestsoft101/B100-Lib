@@ -8,7 +8,7 @@ import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.util.ListenerList;
 import net.minecraft.text.Text;
 
-public class CustomOptionElement<E extends Comparable<E>> extends ButtonOptionElement<E> {
+public class CustomOptionElement<E> extends ButtonOptionElement<E> {
 
 	protected Function<E, Text> toTextFunction;
 	

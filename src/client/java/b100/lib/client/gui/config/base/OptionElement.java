@@ -13,7 +13,7 @@ import b100.lib.client.gui.util.ListenerList;
 import b100.lib.translate.Translations;
 import net.minecraft.text.Text;
 
-public abstract class OptionElement<T extends Comparable<T>, E extends GuiElement> extends GuiContainer implements ConfigElement<T> {
+public abstract class OptionElement<T, E extends GuiElement> extends GuiContainer implements ConfigElement<T> {
 
 	public final GuiScreen screen;
 	
@@ -116,13 +116,13 @@ public abstract class OptionElement<T extends Comparable<T>, E extends GuiElemen
 		super.onResize();
 	}
 	
-	public boolean equal(T value1, T value2) {
-		return value1.compareTo(value2) == 0;
+	public boolean areValuesEqual(T value1, T value2) {
+		return value1.equals(value2);
 	}
 	
 	@Override
 	public boolean isChanged() {
-		return !equal(value, initialValue);
+		return !areValuesEqual(value, initialValue);
 	}
 	
 	@Override
@@ -137,7 +137,7 @@ public abstract class OptionElement<T extends Comparable<T>, E extends GuiElemen
 	
 	@Override
 	public boolean isDefaultValue() {
-		return equal(value, defaultValue);
+		return areValuesEqual(value, defaultValue);
 	}
 	
 	@Override

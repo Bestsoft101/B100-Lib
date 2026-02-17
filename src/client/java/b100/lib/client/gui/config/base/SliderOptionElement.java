@@ -4,7 +4,7 @@ import b100.lib.client.gui.element.GuiSlider;
 import b100.lib.client.gui.listener.SliderListener;
 import b100.lib.client.gui.screen.GuiScreen;
 
-public abstract class SliderOptionElement<T extends Comparable<T>> extends OptionElement<T, GuiSlider<T>> implements SliderListener<T> {
+public abstract class SliderOptionElement<T> extends OptionElement<T, GuiSlider<T>> implements SliderListener<T> {
 
 	public SliderOptionElement(GuiScreen screen, String key, T value, T defaultValue) {
 		super(screen, key, value, defaultValue);

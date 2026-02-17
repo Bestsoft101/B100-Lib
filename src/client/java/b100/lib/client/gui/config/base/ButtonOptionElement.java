@@ -5,7 +5,7 @@ import b100.lib.client.gui.listener.ScreenListener;
 import b100.lib.client.gui.screen.GuiScreen;
 import net.minecraft.text.Text;
 
-public abstract class ButtonOptionElement<T extends Comparable<T>> extends OptionElement<T, GuiButton> implements ScreenListener {
+public abstract class ButtonOptionElement<T> extends OptionElement<T, GuiButton> implements ScreenListener {
 	
 	public ButtonOptionElement(GuiScreen screen, String key, T value, T defaultValue) {
 		super(screen, key, value, defaultValue);
