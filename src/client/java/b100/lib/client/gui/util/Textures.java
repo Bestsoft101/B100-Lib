@@ -3,25 +3,29 @@ package b100.lib.client.gui.util;
 import net.minecraft.util.Identifier;
 
 public class Textures {
+
+	private static final Identifier WIDGETS = vanilla("textures/gui/widgets.png");
+	private static final Identifier BACKGROUND = vanilla("textures/gui/options_background.png");
+	private static final Identifier SLIDER = vanilla("textures/gui/slider.png");
 	
-	public static final Textures INSTANCE = new Textures();
+	public static Textures INSTANCE = new Textures();
 	
-	private Textures() {
-		
+	public static void refresh() {
+		INSTANCE = new Textures();
 	}
 	
-	public final Identifier buttonHover = Identifier.ofVanilla("widget/button_highlighted");
-	public final Identifier buttonNormal = Identifier.ofVanilla("widget/button");
-	public final Identifier buttonDisabled = Identifier.ofVanilla("widget/button_disabled");
+	public final GuiSprite buttonHover = new GuiTextureSprite(WIDGETS, 0, 0, 86, 200, 20);
+	public final GuiSprite buttonNormal = new GuiTextureSprite(WIDGETS, 0, 0, 66, 200, 20);
+	public final GuiSprite buttonDisabled = new GuiTextureSprite(WIDGETS, 0, 0, 46, 200, 20);
 
-	public final Identifier sliderNormal = Identifier.ofVanilla("widget/slider");
-	public final Identifier sliderHighlighted = Identifier.ofVanilla("widget/slider_highlighted");
+	public final GuiSprite sliderNormal = new GuiTextureSprite(SLIDER, 0, 0, 0, 200, 20);
+	public final GuiSprite sliderHighlighted = new GuiTextureSprite(SLIDER, 0, 0, 20, 200, 20);
 	
-	public final Identifier sliderHandle = Identifier.ofVanilla("widget/slider_handle");
-	public final Identifier sliderHandleHighlighted = Identifier.ofVanilla("widget/slider_handle_highlighted");
+	public final GuiSprite sliderHandle = new GuiTextureSprite(SLIDER, 0, 0, 40, 200, 20);
+	public final GuiSprite sliderHandleHighlighted = new GuiTextureSprite(SLIDER, 0, 0, 60, 200, 20);
 
-	public final Identifier scroller = Identifier.ofVanilla("widget/scroller");
-	public final Identifier scrollerBackground = Identifier.ofVanilla("widget/scroller_background");
+	public final GuiSprite scroller = new GuiScrollbarSprite(GuiScrollbarSprite.TYPE_HANDLE);
+	public final GuiSprite scrollerBackground = new GuiScrollbarSprite(GuiScrollbarSprite.TYPE_BG);
 	
 	public final GuiTextures guiTextures = new GuiTextures(false);
 	public final GuiTextures guiTexturesInWorld = new GuiTextures(true);
@@ -38,11 +42,15 @@ public class Textures {
 		public final Identifier footerSeparator;
 		
 		public GuiTextures(boolean inWorld) {
-			menuBackground = Identifier.ofVanilla(inWorld ? "textures/gui/inworld_menu_background.png" : "textures/gui/menu_background.png");
-			menuListBackground = Identifier.ofVanilla(inWorld ? "textures/gui/inworld_menu_list_background.png" : "textures/gui/menu_list_background.png");
-			headerSeparator = Identifier.ofVanilla(inWorld ? "textures/gui/inworld_header_separator.png" : "textures/gui/header_separator.png");
-			footerSeparator = Identifier.ofVanilla(inWorld ? "textures/gui/inworld_footer_separator.png" : "textures/gui/footer_separator.png");
+			menuBackground = BACKGROUND;
+			menuListBackground = BACKGROUND;
+			headerSeparator = vanilla("textures/gui/header_separator.png");
+			footerSeparator = vanilla("textures/gui/footer_separator.png");
 		}
+	}
+	
+	public static Identifier vanilla(String name) {
+		return Identifier.of("minecraft", name);
 	}
 
 }

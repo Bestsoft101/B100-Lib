@@ -57,6 +57,9 @@ public class ScreenWrapper extends Screen {
 		RenderSystem.enableBlend();
 		RenderSystem.disableDepthTest();
 		
+		utils.drawTexture(Textures.INSTANCE.guiTexturesInWorld.menuBackground, 0, 0, 0, 0, screen.width, screen.height, 32, 32);
+		utils.drawRectangle(0, 0, screen.width, screen.height, 0xc0000000);  // TODO don't feel like figuring out vertex colors right now
+		
 		screen.draw();
 	}
 	
@@ -81,8 +84,8 @@ public class ScreenWrapper extends Screen {
 	}
 	
 	@Override
-	public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
-		return screen.scrollEvent(horizontalAmount, verticalAmount, mouseX, mouseY);
+	public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+		return screen.scrollEvent(0.0, amount, mouseX, mouseY);
 	}
 	
 	@Override
@@ -111,7 +114,7 @@ public class ScreenWrapper extends Screen {
 	}
 	
 	@Override
-	public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+	public void renderBackground(DrawContext context) {
 		if(enableBackground || client.world == null) {
 			boolean scissor = false;
 			if(enableBackgroundScissor && client.world != null) {
@@ -119,7 +122,7 @@ public class ScreenWrapper extends Screen {
 				scissor = true;
 			}
 			
-			super.renderBackground(context, mouseX, mouseY, delta);
+			super.renderBackground(context);
 			
 			if(scissor) {
 				utils.drawContext.disableScissor();

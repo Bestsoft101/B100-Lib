@@ -8,6 +8,8 @@ import net.minecraft.util.math.MathHelper;
 
 public class GuiScrollableList extends GuiContainer {
 	
+	public static final int SEPERATOR_SIZE = 0;
+	
 	public final GuiScreen screen;
 	public Layout layout;
 	
@@ -35,15 +37,18 @@ public class GuiScrollableList extends GuiContainer {
 		
 		GuiTextures textures = Textures.INSTANCE.getCurrentGuiTextures();
 		
-		final int separatorSize = 2;
+		final int separatorSize = SEPERATOR_SIZE;
 		
 		utils.drawTexture(textures.menuListBackground, posX, posY + separatorSize, 0, (int) scrollAmount, this.width, this.height - 2 * separatorSize, 32, 32);
-		utils.drawTexture(textures.headerSeparator, posX, posY, 0, 0, this.width, separatorSize, 32, separatorSize);
-		utils.drawTexture(textures.footerSeparator, posX, posY + this.height - separatorSize, 0, 0, this.width, 2, 32, separatorSize);
+		utils.drawRectangle(posX, posY, width, height, 0xe0000000); // TODO don't feel like figuring out vertex colors right now
 		
 		utils.drawContext.enableScissor(posX, posY + separatorSize, posX + width, posY + height - separatorSize);
 		super.draw();
 		utils.drawContext.disableScissor();
+		
+		final int shadowHeight = 5;
+		utils.drawContext.fillGradient(posX, posY, width, posY + shadowHeight, 0xff000000, 0x00000000);
+		utils.drawContext.fillGradient(posX, posY + height - shadowHeight, width, posY + height, 0x00000000, 0xff000000);
 	}
 	
 	@Override
@@ -51,7 +56,7 @@ public class GuiScrollableList extends GuiContainer {
 		scrollRegionHeight = getScrollRegionHeight();
 		contentHeight = layout.getContentHeight(this);
 		maxScrollAmount = Math.max(0.0, contentHeight - scrollRegionHeight);
-		scrollAmount = Math.clamp(scrollAmount, 0.0, maxScrollAmount);
+		scrollAmount = MathHelper.clamp(scrollAmount, 0.0, maxScrollAmount);
 		layout.moveElements(this);
 		
 		super.onResize();
@@ -74,7 +79,7 @@ public class GuiScrollableList extends GuiContainer {
 		if(contentHeight < height) {
 			newScrollAmount = -(height - contentHeight) / 2;
 		}else {
-			newScrollAmount = Math.clamp(newScrollAmount, 0.0, maxScrollAmount);	
+			newScrollAmount = MathHelper.clamp(newScrollAmount, 0.0, maxScrollAmount);	
 		}
 		if(newScrollAmount == scrollAmount) {
 			return;

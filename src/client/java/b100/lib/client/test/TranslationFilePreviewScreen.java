@@ -84,7 +84,7 @@ class TranslationFilePreviewScreen extends BasicScrollableScreen {
 		
 		@Override
 		public void onResize() {
-			wrappedText = MultilineText.create(utils.textRenderer, width, Text.of(value));
+			wrappedText = MultilineText.create(utils.textRenderer, Text.of(value), width);
 			
 			int newHeight = (wrappedText.count() + 1) * 10 + 4;
 			if(height != newHeight) {

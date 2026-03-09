@@ -6,11 +6,11 @@ import b100.lib.client.gui.listener.ActionListener;
 import b100.lib.client.gui.listener.FocusListener;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.util.GuiColors;
+import b100.lib.client.gui.util.GuiSprite;
 import b100.lib.client.gui.util.ListenerList;
 import b100.lib.client.gui.util.Textures;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 
 public class GuiButton extends GuiElement implements Focusable {
 	
@@ -39,7 +39,7 @@ public class GuiButton extends GuiElement implements Focusable {
 	
 	@Override
 	public void draw() {
-		Identifier texture;
+		GuiSprite texture;
 		int textColor;
 		boolean textShadow;
 		

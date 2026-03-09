@@ -25,7 +25,7 @@ public class GuiTextField extends GuiElement implements Focusable {
 	public GuiTextField(GuiScreen screen, Text text) {
 		this.screen = screen;
 		
-		widget = new TextFieldWidget(utils.textRenderer, 200, 20, text);
+		widget = new TextFieldWidget(utils.textRenderer, 0, 0, 200, 20, text);
 		widget.setChangedListener(this::textChanged);
 		widget.setEditableColor(GuiColors.INSTANCE.defaultText);
 		widget.setUneditableColor(GuiColors.INSTANCE.disabledText);
@@ -41,9 +41,6 @@ public class GuiTextField extends GuiElement implements Focusable {
 		}
 		if(widget.getWidth() != width) {
 			widget.setWidth(width);
-		}
-		if(widget.getHeight() != height) {
-			widget.setHeight(height);
 		}
 		widget.render(utils.drawContext, 0, 0, 1.0f);
 	}

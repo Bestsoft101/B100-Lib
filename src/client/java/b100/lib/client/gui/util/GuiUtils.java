@@ -61,8 +61,8 @@ public class GuiUtils {
 		drawString(text.getString(), x - width / 2, y, color, shadow);
 	}
 	
-	public void drawGuiTexture(Identifier texture, int x, int y, int width, int height) {
-		drawContext.drawGuiTexture(texture, x, y, width, height);
+	public void drawGuiTexture(GuiSprite sprite, int x, int y, int width, int height) {
+		sprite.draw(drawContext, x, y, width, height);
 	}
 	
 	public void drawTexture(Identifier texture, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
