@@ -47,8 +47,8 @@ public class GuiScrollableList extends GuiContainer {
 		utils.drawContext.disableScissor();
 		
 		final int shadowHeight = 5;
-		utils.drawContext.fillGradient(posX, posY, width, posY + shadowHeight, 0xff000000, 0x00000000);
-		utils.drawContext.fillGradient(posX, posY + height - shadowHeight, width, posY + height, 0x00000000, 0xff000000);
+		utils.drawContext.fillGradient(posX, posY, posX + width, posY + shadowHeight, 0xff000000, 0x00000000);
+		utils.drawContext.fillGradient(posX, posY + height - shadowHeight, posX + width, posY + height, 0x00000000, 0xff000000);
 	}
 	
 	@Override
