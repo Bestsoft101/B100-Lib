@@ -3,10 +3,16 @@
 	"id": "b100lib",
 	"version": "${version}",
 	"name": "B100 Lib",
-	"description": "Library for my mods, contains GUI, config, and translation systems. Currently used for my Borderless Fullscreen mod",
+	"description": "Library mod",
 	"authors": [
 		"Bestsoft100"
 	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/b100lib",
+		"sources": "https://github.com/Bestsoft101/B100-Lib",
+		"issues": "https://github.com/Bestsoft101/B100-Lib/issues"
+	},
+	"license": "MIT",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
@@ -34,6 +40,10 @@
 	},
 	"custom": {
 		"modmenu": {
+			"links": {
+				"modmenu.modrinth": "https://modrinth.com/mod/b100lib",
+				"modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/b100lib"
+			},
 			"badges": [
 				"library"
 			]
