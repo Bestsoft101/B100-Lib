@@ -1,12 +1,11 @@
 package b100.lib.client.gui.util;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import b100.lib.client.gui.screen.GuiScreen;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
-import net.minecraft.text.Text;
 
 public class ScreenWrapper extends Screen {
 
@@ -29,11 +28,11 @@ public class ScreenWrapper extends Screen {
 	}
 	
 	@Override
-	public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+	public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
 		super.render(context, mouseX, mouseY, delta);
 		
 		utils.drawContext = context;
-		utils.textRenderer = textRenderer;
+		utils.textRenderer = font;
 		
 		screen.setWrapper(this);
 		
@@ -92,18 +91,18 @@ public class ScreenWrapper extends Screen {
 	}
 	
 	@Override
-	protected void addScreenNarrations(NarrationMessageBuilder messageBuilder) {
+	protected void updateNarrationState(NarrationElementOutput messageBuilder) {
 		// TODO
 	}
 	
 	@Override
-	public void onDisplayed() {
+	public void added() {
 		screenOpened = true;
 	}
 	
 	@Override
-	public Text getTitle() {
-		return Text.of("");
+	public Component getTitle() {
+		return Component.nullToEmpty("");
 	}
 	
 	public void setBackgroundEnabled(boolean enableBackground) {
@@ -111,10 +110,10 @@ public class ScreenWrapper extends Screen {
 	}
 	
 	@Override
-	public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-		if(enableBackground || client.world == null) {
+	public void renderBackground(GuiGraphics context, int mouseX, int mouseY, float delta) {
+		if(enableBackground || minecraft.level == null) {
 			boolean scissor = false;
-			if(enableBackgroundScissor && client.world != null) {
+			if(enableBackgroundScissor && minecraft.level != null) {
 				utils.drawContext.enableScissor(backgroundScissorX, backgroundScissorY, backgroundScissorX + backgroundScissorWidth, backgroundScissorY + backgroundScissorHeight);
 				scissor = true;
 			}

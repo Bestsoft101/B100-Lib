@@ -1,19 +1,18 @@
 package b100.lib.client.gui.util;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import b100.lib.client.gui.element.GuiElement;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.mixin.IScreen;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 
 public class GuiUtils {
 	
@@ -21,17 +20,17 @@ public class GuiUtils {
 	
 	public static GuiUtils instance = new GuiUtils();
 	
-	public DrawContext drawContext;
-	public TextRenderer textRenderer;
+	public GuiGraphics drawContext;
+	public Font textRenderer;
 	
 	private GuiUtils() {
 		
 	}
 	
 	public void setScreen(IScreen screen) {
-		MinecraftClient minecraft = MinecraftClient.getInstance();
+		Minecraft minecraft = Minecraft.getInstance();
 		
-		if(minecraft.currentScreen instanceof ScreenWrapper screenWrapper) {
+		if(minecraft.screen instanceof ScreenWrapper screenWrapper) {
 			screenWrapper.screen.onClose();
 		}
 		
@@ -47,26 +46,26 @@ public class GuiUtils {
 	}
 	
 	public void drawString(String string, int x, int y, int color, boolean shadow) {
-		drawContext.drawText(textRenderer, string, x, y, color, shadow);
+		drawContext.drawString(textRenderer, string, x, y, color, shadow);
 		
 		RenderSystem.enableBlend();
 	}
 	
-	public void drawString(Text text, int x, int y, int color, boolean shadow) {
+	public void drawString(Component text, int x, int y, int color, boolean shadow) {
 		drawString(text.getString(), x, y, color, shadow);
 	}
 
-	public void drawCenteredString(Text text, int x, int y, int color, boolean shadow) {
-		int width = textRenderer.getWidth(text);
+	public void drawCenteredString(Component text, int x, int y, int color, boolean shadow) {
+		int width = textRenderer.width(text);
 		drawString(text.getString(), x - width / 2, y, color, shadow);
 	}
 	
-	public void drawGuiTexture(Identifier texture, int x, int y, int width, int height) {
-		drawContext.drawGuiTexture(texture, x, y, width, height);
+	public void drawGuiTexture(ResourceLocation texture, int x, int y, int width, int height) {
+		drawContext.blitSprite(texture, x, y, width, height);
 	}
 	
-	public void drawTexture(Identifier texture, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
-		drawContext.drawTexture(texture, x, y, u, v, width, height, textureWidth, textureHeight);
+	public void drawTexture(ResourceLocation texture, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
+		drawContext.blit(texture, x, y, u, v, width, height, textureWidth, textureHeight);
 	}
 	
 	public void drawRectangle(int x, int y, int w, int h, int color) {
@@ -74,16 +73,16 @@ public class GuiUtils {
 	}
 	
 	public void playSound(SoundEvent sound) {
-		MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(sound, 1.0f));
+		Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(sound, 1.0f));
 	}
 	
-	public void playSound(RegistryEntry.Reference<SoundEvent> sound) {
-		MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(sound, 1.0f));
+	public void playSound(Holder.Reference<SoundEvent> sound) {
+		Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(sound, 1.0f));
 	}
 	
 	@SuppressWarnings("resource")
 	public boolean isInWorld() {
-		return MinecraftClient.getInstance().world != null;
+		return Minecraft.getInstance().level != null;
 	}
 	
 	public static void setDoubleFooterButtonPositions(GuiScreen screen, int y, GuiElement left, GuiElement right) {

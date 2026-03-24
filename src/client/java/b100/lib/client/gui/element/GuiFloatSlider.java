@@ -3,8 +3,8 @@ package b100.lib.client.gui.element;
 import org.lwjgl.glfw.GLFW;
 
 import b100.lib.client.gui.screen.GuiScreen;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 
 public class GuiFloatSlider extends GuiSlider<Float> {
 	
@@ -24,16 +24,16 @@ public class GuiFloatSlider extends GuiSlider<Float> {
 	@Override
 	public void setValue(Float value) {
 		if(sliderValue != value) {
-			sliderValue = MathHelper.clamp(value, 0.0f, 1.0f);
+			sliderValue = Mth.clamp(value, 0.0f, 1.0f);
 			onValueChange(value);
 		}
 	}
 	
 	@Override
-	protected Text getText(Float value) {
+	protected Component getText(Float value) {
 		int percent = Math.round(sliderValue * 100.0f);
 		
-		return Text.of(percent + "%");
+		return Component.nullToEmpty(percent + "%");
 	}
 	
 	@Override

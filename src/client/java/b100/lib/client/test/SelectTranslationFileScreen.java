@@ -3,12 +3,11 @@ package b100.lib.client.test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
+import net.minecraft.network.chat.Component;
 import b100.lib.client.B100LibClient;
 import b100.lib.client.gui.element.GuiButton;
 import b100.lib.client.mixin.IScreen;
 import b100.lib.translate.Translate;
-import net.minecraft.text.Text;
 
 class SelectTranslationFileScreen extends BasicScrollableScreen {
 	
@@ -35,7 +34,7 @@ class SelectTranslationFileScreen extends BasicScrollableScreen {
 		sortedPaths.sort(String.CASE_INSENSITIVE_ORDER);
 		
 		for(String path : paths) {
-			GuiButton button = new GuiButton(this, Text.of(path));
+			GuiButton button = new GuiButton(this, Component.nullToEmpty(path));
 			
 			button.addActionListener(e -> utils.setScreen(new TranslationFilePreviewScreen(this, path)));
 			

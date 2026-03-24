@@ -4,7 +4,7 @@ import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.util.FocusDirection;
 import b100.lib.client.gui.util.Textures;
 import b100.lib.client.gui.util.Textures.GuiTextures;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 public class GuiScrollableList extends GuiContainer {
 	
@@ -97,7 +97,7 @@ public class GuiScrollableList extends GuiContainer {
 	}
 	
 	public int getScrollOffset() {
-		return -MathHelper.floor(scrollAmount);
+		return -Mth.floor(scrollAmount);
 	}
 	
 	public double getScrollAmount() {

@@ -3,7 +3,7 @@ package b100.lib.client.gui.element;
 import b100.lib.client.gui.listener.FocusListener;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.util.ListenerList;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 public class GuiListButton extends GuiElement implements Focusable {
 	
@@ -15,7 +15,7 @@ public class GuiListButton extends GuiElement implements Focusable {
 	public int outlineColor = 0xFF808080;
 	public int fillColor = 0xFF000000;
 	
-	public Text text;
+	public Component text;
 	
 	private boolean clickable = true;
 	private boolean focused = false;
@@ -36,7 +36,7 @@ public class GuiListButton extends GuiElement implements Focusable {
 		}
 		
 		if(text != null) {
-			int textWidth = utils.textRenderer.getWidth(text);
+			int textWidth = utils.textRenderer.width(text);
 			int textX = posX + (width - textWidth) / 2;
 			int textY = posY + height / 2 - 4;
 			utils.drawString(text, textX, textY, 0xFFFFFF, true);

@@ -3,8 +3,8 @@ package b100.lib.client.gui.element;
 import org.lwjgl.glfw.GLFW;
 
 import b100.lib.client.gui.screen.GuiScreen;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 
 public class GuiIntegerSlider extends GuiSlider<Integer> {
 
@@ -35,14 +35,14 @@ public class GuiIntegerSlider extends GuiSlider<Integer> {
 	@Override
 	public void setValue(Integer value) {
 		if(sliderValue != value) {
-			sliderValue = MathHelper.clamp(value, offset, offset + steps - 1);
+			sliderValue = Mth.clamp(value, offset, offset + steps - 1);
 			onValueChange(value);
 		}
 	}
 	
 	@Override
-	protected Text getText(Integer value) {
-		return Text.of(String.valueOf(value));
+	protected Component getText(Integer value) {
+		return Component.nullToEmpty(String.valueOf(value));
 	}
 	
 	@Override
@@ -62,12 +62,12 @@ public class GuiIntegerSlider extends GuiSlider<Integer> {
 	
 	@Override
 	protected float getSliderValueAsFloat(Integer value) {
-		return MathHelper.clamp((value - offset) / (float) (steps - 1), 0.0f, 1.0f);
+		return Mth.clamp((value - offset) / (float) (steps - 1), 0.0f, 1.0f);
 	}
 
 	@Override
 	protected Integer convertFloatToSliderValue(float value) {
-		return MathHelper.clamp(Math.round(value * (steps - 1)), 0, steps - 1) + offset;
+		return Mth.clamp(Math.round(value * (steps - 1)), 0, steps - 1) + offset;
 	}
 	
 }

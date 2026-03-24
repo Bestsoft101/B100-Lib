@@ -3,7 +3,7 @@ package b100.lib.client.test;
 import b100.lib.client.B100LibClient;
 import b100.lib.client.gui.element.GuiButton;
 import b100.lib.client.mixin.IScreen;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 class ButtonTestScreen extends BasicScrollableScreen {
 
@@ -21,7 +21,7 @@ class ButtonTestScreen extends BasicScrollableScreen {
 	@Override
 	public void initScrollElements() {
 		for(int i=0; i < 16; i++) {
-			scrollList.add(new GuiButton(this, Text.of("Button " + (i + 1))));
+			scrollList.add(new GuiButton(this, Component.nullToEmpty("Button " + (i + 1))));
 		}
 	}
 	

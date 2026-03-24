@@ -3,7 +3,7 @@ package b100.lib.client.gui.config.base;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-
+import net.minecraft.network.chat.Component;
 import b100.lib.client.gui.element.Focusable;
 import b100.lib.client.gui.element.GuiContainer;
 import b100.lib.client.gui.element.GuiElement;
@@ -11,14 +11,13 @@ import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.util.GuiColors;
 import b100.lib.client.gui.util.ListenerList;
 import b100.lib.translate.Translations;
-import net.minecraft.text.Text;
 
 public abstract class OptionElement<T, E extends GuiElement> extends GuiContainer implements ConfigElement<T> {
 
 	public final GuiScreen screen;
 	
-	protected Text name;
-	protected Text tooltipText;
+	protected Component name;
+	protected Component tooltipText;
 	
 	protected final T defaultValue;
 	protected T initialValue;
@@ -40,7 +39,7 @@ public abstract class OptionElement<T, E extends GuiElement> extends GuiContaine
 		
 		String tooltipText = Translations.INSTANCE.asStringOrNull(key + ".tooltip");
 		if(tooltipText != null) {
-			this.tooltipText = Text.of(tooltipText);
+			this.tooltipText = Component.nullToEmpty(tooltipText);
 		}
 		
 		setSize(320, 24);
@@ -179,12 +178,12 @@ public abstract class OptionElement<T, E extends GuiElement> extends GuiContaine
 		return saveConsumers.remove(consumer);
 	}
 	
-	public OptionElement<T, E> setTooltipText(Text tooltipText) {
+	public OptionElement<T, E> setTooltipText(Component tooltipText) {
 		this.tooltipText = tooltipText;
 		return this;
 	}
 	
-	public Text getTooltipText() {
+	public Component getTooltipText() {
 		return tooltipText;
 	}
 	

@@ -14,7 +14,7 @@ import b100.lib.client.gui.util.GuiUtils;
 import b100.lib.client.gui.util.ListenerList;
 import b100.lib.client.gui.util.ScreenWrapper;
 import b100.lib.client.mixin.IScreen;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 public abstract class GuiScreen extends GuiContainer implements IScreen, FocusListener, ContainerListener {
 	
@@ -97,12 +97,12 @@ public abstract class GuiScreen extends GuiContainer implements IScreen, FocusLi
 		return false;
 	}
 	
-	public void drawWrappedTooltip(Text tooltip) {
+	public void drawWrappedTooltip(Component tooltip) {
 		drawWrappedTooltip(tooltip, GuiUtils.DEFAULT_TOOLTIP_WIDTH);
 	}
 	
-	public void drawWrappedTooltip(Text tooltip, int width) {
-		wrapper.setTooltip(utils.textRenderer.wrapLines(tooltip, width));
+	public void drawWrappedTooltip(Component tooltip, int width) {
+		wrapper.setTooltipForNextRenderPass(utils.textRenderer.split(tooltip, width));
 	}
 	
 	public boolean focusNextElement(FocusDirection direction) {

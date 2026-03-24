@@ -2,17 +2,16 @@ package b100.lib.client.gui.config.element;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
-
+import net.minecraft.network.chat.Component;
 import b100.lib.client.B100LibClient;
 import b100.lib.client.gui.config.base.ButtonOptionElement;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.util.UpdateMode;
 import b100.lib.config.property.BooleanProperty;
-import net.minecraft.text.Text;
 
 public class BooleanToggleElement extends ButtonOptionElement<Boolean> {
 
-	protected Function<Boolean, Text> toTextFunction;
+	protected Function<Boolean, Component> toTextFunction;
 
 	public BooleanToggleElement(GuiScreen screen, String key, boolean value, boolean defaultValue) {
 		super(screen, key, value, defaultValue);
@@ -34,7 +33,7 @@ public class BooleanToggleElement extends ButtonOptionElement<Boolean> {
 	}
 	
 	@Override
-	public Text getButtonText() {
+	public Component getButtonText() {
 		if(toTextFunction != null) {
 			return toTextFunction.apply(value);	
 		}
@@ -50,16 +49,16 @@ public class BooleanToggleElement extends ButtonOptionElement<Boolean> {
 			color = "";
 		}
 		
-		return Text.of(value ? color + B100LibClient.TRANS.asString("value.yes") : color + B100LibClient.TRANS.asString("value.no"));
+		return Component.nullToEmpty(value ? color + B100LibClient.TRANS.asString("value.yes") : color + B100LibClient.TRANS.asString("value.no"));
 	}
 	
-	public BooleanToggleElement setToTextFunction(Function<Boolean, Text> toTextFunction) {
+	public BooleanToggleElement setToTextFunction(Function<Boolean, Component> toTextFunction) {
 		this.toTextFunction = toTextFunction;
 		update();
 		return this;
 	}
 	
-	public Function<Boolean, Text> getToTextFunction() {
+	public Function<Boolean, Component> getToTextFunction() {
 		return toTextFunction;
 	}
 	

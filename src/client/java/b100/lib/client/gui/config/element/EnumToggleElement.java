@@ -2,18 +2,17 @@ package b100.lib.client.gui.config.element;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
-
+import net.minecraft.network.chat.Component;
 import b100.lib.client.gui.config.base.ButtonOptionElement;
 import b100.lib.client.gui.config.base.ConfigElement;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.util.UpdateMode;
 import b100.lib.config.property.EnumProperty;
-import net.minecraft.text.Text;
 
 public class EnumToggleElement<E extends Enum<E>> extends ButtonOptionElement<E> implements ConfigElement<E> {
 
 	protected final Class<E> type;
-	protected Function<E, Text> toTextFunction;
+	protected Function<E, Component> toTextFunction;
 	
 	public EnumToggleElement(GuiScreen screen, String key, Class<E> type, E value, E defaultValue) {
 		super(screen, key, value, defaultValue);
@@ -47,19 +46,19 @@ public class EnumToggleElement<E extends Enum<E>> extends ButtonOptionElement<E>
 	}
 
 	@Override
-	public Text getButtonText() {
+	public Component getButtonText() {
 		if(toTextFunction != null) {
 			return toTextFunction.apply(value);
 		}
-		return Text.literal(value.name());
+		return Component.literal(value.name());
 	}
 	
-	public EnumToggleElement<E> setToTextFunction(Function<E, Text> toTextFunction) {
+	public EnumToggleElement<E> setToTextFunction(Function<E, Component> toTextFunction) {
 		this.toTextFunction = toTextFunction;
 		return this;
 	}
 	
-	public Function<E, Text> getToTextFunction() {
+	public Function<E, Component> getToTextFunction() {
 		return toTextFunction;
 	}
 	

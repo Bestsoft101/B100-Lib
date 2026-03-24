@@ -3,8 +3,8 @@ package b100.lib.client.gui.element;
 import org.lwjgl.glfw.GLFW;
 
 import b100.lib.client.gui.screen.GuiScreen;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 
 public class GuiEnumSlider<E extends Enum<E>> extends GuiSlider<E> {
 
@@ -34,8 +34,8 @@ public class GuiEnumSlider<E extends Enum<E>> extends GuiSlider<E> {
 	}
 
 	@Override
-	protected Text getText(E value) {
-		return Text.of(value.name());
+	protected Component getText(E value) {
+		return Component.nullToEmpty(value.name());
 	}
 
 	@Override
@@ -60,14 +60,14 @@ public class GuiEnumSlider<E extends Enum<E>> extends GuiSlider<E> {
 		final int steps = type.getEnumConstants().length - 1;
 		final int index = indexOf(value);
 		
-		return MathHelper.clamp(index / (float) steps, 0.0f, 1.0f);
+		return Mth.clamp(index / (float) steps, 0.0f, 1.0f);
 	}
 
 	@Override
 	protected E convertFloatToSliderValue(float value) {
 		final int steps = type.getEnumConstants().length - 1;
 		
-		return getValue(MathHelper.clamp(Math.round(value * steps), 0, steps));
+		return getValue(Mth.clamp(Math.round(value * steps), 0, steps));
 	}
 	
 	protected int indexOf(E value) {

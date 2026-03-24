@@ -1,14 +1,14 @@
 package b100.lib.client.gui.element;
 
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 public class GuiTextElement extends GuiElement {
 	
-	public Text text;
+	public Component text;
 	public boolean shadow;
 	public int color;
 	
-	public GuiTextElement(Text text, boolean shadow, int color) {
+	public GuiTextElement(Component text, boolean shadow, int color) {
 		this.text = text;
 		this.shadow = shadow;
 		this.color = color;

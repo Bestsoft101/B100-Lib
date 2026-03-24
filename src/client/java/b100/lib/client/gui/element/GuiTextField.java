@@ -6,14 +6,14 @@ import b100.lib.client.gui.listener.FocusListener;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.util.GuiColors;
 import b100.lib.client.gui.util.ListenerList;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.network.chat.Component;
 
 public class GuiTextField extends GuiElement implements Focusable {
 
 	public final GuiScreen screen;
 	
-	private TextFieldWidget widget;
+	private EditBox widget;
 	
 	private boolean focusable = true;
 	
@@ -22,13 +22,13 @@ public class GuiTextField extends GuiElement implements Focusable {
 	public final ListenerList<FocusListener> focusListeners = new ListenerList<>(this);
 	public final ListenerList<ActionListener> actionListeners = new ListenerList<>(this);
 	
-	public GuiTextField(GuiScreen screen, Text text) {
+	public GuiTextField(GuiScreen screen, Component text) {
 		this.screen = screen;
 		
-		widget = new TextFieldWidget(utils.textRenderer, 200, 20, text);
-		widget.setChangedListener(this::textChanged);
-		widget.setEditableColor(GuiColors.INSTANCE.defaultText);
-		widget.setUneditableColor(GuiColors.INSTANCE.disabledText);
+		widget = new EditBox(utils.textRenderer, 200, 20, text);
+		widget.setResponder(this::textChanged);
+		widget.setTextColor(GuiColors.INSTANCE.defaultText);
+		widget.setTextColorUneditable(GuiColors.INSTANCE.disabledText);
 		
 		width = 200;
 		height = 20;
@@ -97,11 +97,11 @@ public class GuiTextField extends GuiElement implements Focusable {
 	}
 	
 	public void setText(String text) {
-		widget.setText(text);
+		widget.setValue(text);
 	}
 	
 	public String getText() {
-		return widget.getText();
+		return widget.getValue();
 	}
 
 	@Override
@@ -147,13 +147,13 @@ public class GuiTextField extends GuiElement implements Focusable {
 	}
 	
 	@Deprecated
-	public TextFieldWidget getWidget() {
+	public EditBox getWidget() {
 		return widget;
 	}
 	
 	@Override
 	public String toString() {
-		String text = "\"" + widget.getText() + "\"";
+		String text = "\"" + widget.getValue() + "\"";
 		
 		return getClass().getSimpleName() + "[x=" + posX + ",y=" + posY + ",w=" + width + ",h=" + height + ",text=" + text + "]";
 	}

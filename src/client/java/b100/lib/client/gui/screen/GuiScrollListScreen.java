@@ -7,7 +7,7 @@ import b100.lib.client.gui.element.GuiScrollableList.Layout;
 import b100.lib.client.gui.element.GuiScrollableList.ListLayout;
 import b100.lib.client.gui.util.GuiUtils;
 import b100.lib.client.mixin.IScreen;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 public abstract class GuiScrollListScreen extends GuiScreen {
 
@@ -18,7 +18,7 @@ public abstract class GuiScrollListScreen extends GuiScreen {
 	public int headerSize = 32;
 	public int footerSize = 32;
 	
-	public Text title;
+	public Component title;
 
 	public GuiScrollListScreen(IScreen parentScreen) {
 		super(parentScreen);

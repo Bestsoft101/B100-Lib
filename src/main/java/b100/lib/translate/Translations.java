@@ -1,6 +1,6 @@
 package b100.lib.translate;
 
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 public interface Translations {
 	
@@ -10,9 +10,9 @@ public interface Translations {
 	
 	public String asStringOrNull(String key);
 	
-	public Text asText(String key);
+	public Component asText(String key);
 	
-	public Text asTextOrNull(String key);
+	public Component asTextOrNull(String key);
 	
 	public boolean exists(String key);
 	

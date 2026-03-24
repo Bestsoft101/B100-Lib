@@ -1,16 +1,15 @@
 package b100.lib.client.gui.config.element;
 
 import java.util.function.Function;
-
+import net.minecraft.network.chat.Component;
 import b100.lib.client.gui.config.base.ButtonOptionElement;
 import b100.lib.client.gui.listener.ActionListener;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.util.ListenerList;
-import net.minecraft.text.Text;
 
 public class CustomOptionElement<E> extends ButtonOptionElement<E> {
 
-	protected Function<E, Text> toTextFunction;
+	protected Function<E, Component> toTextFunction;
 	
 	public final ListenerList<ActionListener> actionListeners = new ListenerList<>(this);
 	
@@ -30,11 +29,11 @@ public class CustomOptionElement<E> extends ButtonOptionElement<E> {
 	}
 	
 	@Override
-	public Text getButtonText() {
+	public Component getButtonText() {
 		if(toTextFunction != null) {
 			return toTextFunction.apply(value);	
 		}
-		return Text.of(String.valueOf(value));
+		return Component.nullToEmpty(String.valueOf(value));
 	}
 	
 	public CustomOptionElement<E> setValue(E value) {
@@ -55,13 +54,13 @@ public class CustomOptionElement<E> extends ButtonOptionElement<E> {
 		return actionListeners.remove(actionListener);
 	}
 	
-	public CustomOptionElement<E> setToTextFunction(Function<E, Text> toTextFunction) {
+	public CustomOptionElement<E> setToTextFunction(Function<E, Component> toTextFunction) {
 		this.toTextFunction = toTextFunction;
 		update();
 		return this;
 	}
 	
-	public Function<E, Text> getToTextFunction() {
+	public Function<E, Component> getToTextFunction() {
 		return toTextFunction;
 	}
 

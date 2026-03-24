@@ -1,6 +1,6 @@
 package b100.lib.translate;
 
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 class TranslationsImpl implements Translations {
 	
@@ -24,17 +24,17 @@ class TranslationsImpl implements Translations {
 	}
 
 	@Override
-	public Text asText(String key) {
+	public Component asText(String key) {
 		key = addPrefixToKey(key);
 		String translation = Translate.get(key);
-		return translation != null ? Text.of(translation) : Text.of(key);
+		return translation != null ? Component.nullToEmpty(translation) : Component.nullToEmpty(key);
 	}
 
 	@Override
-	public Text asTextOrNull(String key) {
+	public Component asTextOrNull(String key) {
 		key = addPrefixToKey(key);
 		String translation = Translate.get(key);
-		return translation != null ? Text.of(translation) : null;
+		return translation != null ? Component.nullToEmpty(translation) : null;
 	}
 
 	@Override

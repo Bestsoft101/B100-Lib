@@ -8,10 +8,10 @@ import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.util.GuiColors;
 import b100.lib.client.gui.util.ListenerList;
 import b100.lib.client.gui.util.Textures;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 
 public abstract class GuiSlider<T> extends GuiElement implements Focusable {
 	
@@ -45,7 +45,7 @@ public abstract class GuiSlider<T> extends GuiElement implements Focusable {
 	
 	public abstract void setValue(T value);
 	
-	protected abstract Text getText(T value);
+	protected abstract Component getText(T value);
 	
 	protected abstract T getNextSliderValue(T prev, int direction, int modifiers);
 	
@@ -62,14 +62,14 @@ public abstract class GuiSlider<T> extends GuiElement implements Focusable {
 		if(dragging) {
 			float mouseX = (float) screen.mouseX;
 			float f = (mouseX - posX - (HANDLE_WIDTH / 2)) / (width - HANDLE_WIDTH);
-			f = MathHelper.clamp(f, 0.0f, 1.0f);
+			f = Mth.clamp(f, 0.0f, 1.0f);
 			T newValue = convertFloatToSliderValue(f);
 			setValue(newValue);
 		}
 		
 		final boolean mouseOver = screen.isMouseOver(this);
 		
-		Identifier backgroundTexture, handleTexture;
+		ResourceLocation backgroundTexture, handleTexture;
 		int textColor;
 		boolean textShadow;
 		

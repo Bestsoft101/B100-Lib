@@ -4,8 +4,8 @@ import b100.lib.B100Lib;
 import b100.lib.Print;
 import b100.lib.translate.Translations;
 import net.fabricmc.api.ClientModInitializer;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.resource.language.LanguageManager;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.language.LanguageManager;
 
 public class B100LibClient implements ClientModInitializer {
 	
@@ -21,11 +21,11 @@ public class B100LibClient implements ClientModInitializer {
 	}
 	
 	public static String getCurrentLanguage() {
-		LanguageManager languageManager = MinecraftClient.getInstance().getLanguageManager();
+		LanguageManager languageManager = Minecraft.getInstance().getLanguageManager();
 		if(languageManager == null) {
 			Print.print("Language Manager is null!");
 			return null;
 		}
-		return languageManager.getLanguage();
+		return languageManager.getSelected();
 	}
 }

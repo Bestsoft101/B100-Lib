@@ -8,9 +8,9 @@ import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.util.GuiColors;
 import b100.lib.client.gui.util.ListenerList;
 import b100.lib.client.gui.util.Textures;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 
 public class GuiButton extends GuiElement implements Focusable {
 	
@@ -18,7 +18,7 @@ public class GuiButton extends GuiElement implements Focusable {
 	public final GuiScreen screen;
 	
 	/** The text of this button. Can be null. */
-	public Text text;
+	public Component text;
 	
 	/** Should the button be clickable or grayed out */
 	private boolean clickable = true;
@@ -29,7 +29,7 @@ public class GuiButton extends GuiElement implements Focusable {
 	public final ListenerList<ActionListener> actionListeners = new ListenerList<>(this);
 	public final ListenerList<FocusListener> focusListeners = new ListenerList<>(this);
 	
-	public GuiButton(GuiScreen screen, Text text) {
+	public GuiButton(GuiScreen screen, Component text) {
 		this.screen = screen;
 		this.text = text;
 		
@@ -39,7 +39,7 @@ public class GuiButton extends GuiElement implements Focusable {
 	
 	@Override
 	public void draw() {
-		Identifier texture;
+		ResourceLocation texture;
 		int textColor;
 		boolean textShadow;
 		
@@ -63,7 +63,7 @@ public class GuiButton extends GuiElement implements Focusable {
 		utils.drawGuiTexture(texture, posX, posY, width, height);
 		
 		if(text != null) {
-			int textWidth = utils.textRenderer.getWidth(text);
+			int textWidth = utils.textRenderer.width(text);
 			int textX = posX + (width - textWidth) / 2;
 			int textY = posY + height / 2 - 4;
 			utils.drawString(text, textX, textY, textColor, textShadow);

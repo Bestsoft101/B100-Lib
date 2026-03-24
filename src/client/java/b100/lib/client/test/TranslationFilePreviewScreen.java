@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import net.minecraft.client.gui.components.MultiLineLabel;
+import net.minecraft.network.chat.Component;
 import b100.lib.client.gui.element.GuiListButton;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.mixin.IScreen;
 import b100.lib.translate.Translate;
 import b100.lib.util.ConfigUtil;
-import net.minecraft.client.font.MultilineText;
-import net.minecraft.text.Text;
 
 class TranslationFilePreviewScreen extends BasicScrollableScreen {
 	
@@ -63,7 +62,7 @@ class TranslationFilePreviewScreen extends BasicScrollableScreen {
 		public String key;
 		public String value;
 		
-		public MultilineText wrappedText;
+		public MultiLineLabel wrappedText;
 		public int wrappedTextWidth = -1;
 		
 		public TranslationElement(GuiScreen screen, String key, String value) {
@@ -78,15 +77,15 @@ class TranslationFilePreviewScreen extends BasicScrollableScreen {
 		@Override
 		public void draw() {
 			super.draw();
-			wrappedText.drawWithShadow(utils.drawContext, posX + 3, posY + 3, 10, 0xFFFFFF);
+			wrappedText.renderLeftAligned(utils.drawContext, posX + 3, posY + 3, 10, 0xFFFFFF);
 			utils.drawString(key, posX + 3, posY + height - 11, 0x606060, true);
 		}
 		
 		@Override
 		public void onResize() {
-			wrappedText = MultilineText.create(utils.textRenderer, width, Text.of(value));
+			wrappedText = MultiLineLabel.create(utils.textRenderer, width, Component.nullToEmpty(value));
 			
-			int newHeight = (wrappedText.count() + 1) * 10 + 4;
+			int newHeight = (wrappedText.getLineCount() + 1) * 10 + 4;
 			if(height != newHeight) {
 				height = newHeight;
 				screen.onResize();

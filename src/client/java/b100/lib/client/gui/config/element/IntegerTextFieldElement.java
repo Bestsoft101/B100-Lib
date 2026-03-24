@@ -1,7 +1,7 @@
 package b100.lib.client.gui.config.element;
 
 import java.util.function.Consumer;
-
+import net.minecraft.network.chat.Component;
 import b100.lib.client.gui.config.base.OptionElement;
 import b100.lib.client.gui.element.GuiElement;
 import b100.lib.client.gui.element.GuiTextField;
@@ -10,7 +10,6 @@ import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.config.base.ConfigElement;
 import b100.lib.client.util.UpdateMode;
 import b100.lib.config.property.IntProperty;
-import net.minecraft.text.Text;
 
 public class IntegerTextFieldElement extends OptionElement<Integer, GuiTextField> implements ActionListener, ConfigElement<Integer> {
 	
@@ -28,7 +27,7 @@ public class IntegerTextFieldElement extends OptionElement<Integer, GuiTextField
 
 	@Override
 	protected GuiTextField createOptionElement() {
-		return new GuiTextField(screen, Text.of(String.valueOf(value)));
+		return new GuiTextField(screen, Component.nullToEmpty(String.valueOf(value)));
 	}
 
 	@Override

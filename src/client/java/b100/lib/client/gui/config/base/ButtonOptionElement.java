@@ -3,7 +3,7 @@ package b100.lib.client.gui.config.base;
 import b100.lib.client.gui.element.GuiButton;
 import b100.lib.client.gui.listener.ScreenListener;
 import b100.lib.client.gui.screen.GuiScreen;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 public abstract class ButtonOptionElement<T> extends OptionElement<T, GuiButton> implements ScreenListener {
 	
@@ -39,7 +39,7 @@ public abstract class ButtonOptionElement<T> extends OptionElement<T, GuiButton>
 	
 	protected abstract void onClick(int mouseButton);
 	
-	public abstract Text getButtonText();
+	public abstract Component getButtonText();
 	
 	public void update() {
 		getOptionElement().text = getButtonText();
