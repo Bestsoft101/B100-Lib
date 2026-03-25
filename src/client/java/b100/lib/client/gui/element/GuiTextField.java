@@ -7,6 +7,10 @@ import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.gui.util.GuiColors;
 import b100.lib.client.gui.util.ListenerList;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.input.CharacterEvent;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.input.MouseButtonInfo;
 import net.minecraft.network.chat.Component;
 
 public class GuiTextField extends GuiElement implements Focusable {
@@ -45,15 +49,15 @@ public class GuiTextField extends GuiElement implements Focusable {
 		if(widget.getHeight() != height) {
 			widget.setHeight(height);
 		}
-		widget.render(utils.getGraphics(), 0, 0, 1.0f);
+		widget.extractRenderState(utils.getGraphics(), 0, 0, 1.0f);
 	}
 	
 	@Override
 	public boolean keyEvent(int key, int scancode, int modifiers, boolean pressed) {
 		if(pressed) {
-			return widget.keyPressed(key, scancode, modifiers);
+			return widget.keyPressed(new KeyEvent(key, scancode, modifiers));
 		}else {
-			return widget.keyReleased(key, scancode, modifiers);
+			return widget.keyReleased(new KeyEvent(key, scancode, modifiers));
 		}
 	}
 	
@@ -64,21 +68,21 @@ public class GuiTextField extends GuiElement implements Focusable {
 				if(isFocusable()) {
 					setFocused(true);	
 				}
-				widget.mouseClicked(mouseX, mouseY, button);
+				widget.mouseClicked(new MouseButtonEvent(mouseX, mouseY, new MouseButtonInfo(button, 0)), false);
 				return true;
 			}else {
 				setFocused(false);
 				return false;
 			}
 		}else {
-			widget.mouseReleased(mouseX, mouseY, button);
+			widget.mouseReleased(new MouseButtonEvent(mouseX, mouseY, new MouseButtonInfo(button, 0)));
 			return false;
 		}
 	}
 	
 	@Override
 	public void charEvent(char c, int modifiers) {
-		widget.charTyped(c, modifiers);
+		widget.charTyped(new CharacterEvent(c));
 	}
 	
 	private void textChanged(String text) {

@@ -9,7 +9,7 @@ import b100.lib.client.gui.util.GuiColors;
 import b100.lib.client.gui.util.ListenerList;
 import b100.lib.client.gui.util.Textures;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 
@@ -69,7 +69,7 @@ public abstract class GuiSlider<T> extends GuiElement implements Focusable {
 		
 		final boolean mouseOver = screen.isMouseOver(this);
 		
-		ResourceLocation backgroundTexture, handleTexture;
+		Identifier backgroundTexture, handleTexture;
 		int textColor;
 		boolean textShadow;
 		

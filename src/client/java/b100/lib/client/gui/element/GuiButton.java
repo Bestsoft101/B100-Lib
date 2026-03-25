@@ -9,7 +9,7 @@ import b100.lib.client.gui.util.GuiColors;
 import b100.lib.client.gui.util.ListenerList;
 import b100.lib.client.gui.util.Textures;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 
 public class GuiButton extends GuiElement implements Focusable {
@@ -39,7 +39,7 @@ public class GuiButton extends GuiElement implements Focusable {
 	
 	@Override
 	public void draw() {
-		ResourceLocation texture;
+		Identifier texture;
 		int textColor;
 		boolean textShadow;
 		

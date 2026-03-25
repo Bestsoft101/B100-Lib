@@ -2,21 +2,20 @@ package b100.lib.client.gui.util;
 
 import java.util.List;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-
 import b100.lib.client.gui.element.GuiElement;
 import b100.lib.client.gui.screen.GuiScreen;
 import b100.lib.client.mixin.IScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.MultiLineLabel;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.FormattedCharSequence;
 
@@ -26,7 +25,7 @@ public class GuiUtils {
 	
 	public static GuiUtils instance = new GuiUtils();
 	
-	private GuiGraphics graphics;
+	private GuiGraphicsExtractor graphics;
 	private Font font;
 	
 	private GuiUtils() {
@@ -54,9 +53,7 @@ public class GuiUtils {
 	////////////////////////////////
 	
 	public void drawText(String string, int x, int y, int color, boolean shadow) {
-		graphics.drawString(font, string, x, y, fixAlpha(color), shadow);
-		
-		RenderSystem.enableBlend();
+		graphics.text(font, string, x, y, fixAlpha(color), shadow);
 	}
 	
 	public void drawText(Component text, int x, int y, int color, boolean shadow) {
@@ -70,7 +67,7 @@ public class GuiUtils {
 	
 	public void drawLines(List<FormattedCharSequence> lines, int x, int y, int lineHeight, int color, boolean shadow) {
 		for(FormattedCharSequence line : lines) {
-			graphics.drawString(font, line, x, y, fixAlpha(color));
+			graphics.text(font, line, x, y, fixAlpha(color));
 			y += lineHeight;
 		}
 	}
@@ -107,12 +104,12 @@ public class GuiUtils {
 	
 	////////////////////////////////
 	
-	public void drawSprite(ResourceLocation texture, int x, int y, int width, int height) {
-		graphics.blitSprite(texture, x, y, width, height);
+	public void drawSprite(Identifier texture, int x, int y, int width, int height) {
+		graphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height);
 	}
 	
-	public void drawTexture(ResourceLocation texture, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
-		graphics.blit(texture, x, y, u, v, width, height, textureWidth, textureHeight);
+	public void drawTexture(Identifier texture, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
+		graphics.blit(RenderPipelines.GUI_TEXTURED, texture, x, y, u, v, width, height, textureWidth, textureHeight);
 	}
 	
 	public void drawRectangle(int x, int y, int w, int h, int color) {
@@ -175,11 +172,11 @@ public class GuiUtils {
 	
 	////////////////////////////////
 	
-	public GuiGraphics getGraphics() {
+	public GuiGraphicsExtractor getGraphics() {
 		return graphics;
 	}
 	
-	public void setGraphics(GuiGraphics graphics) {
+	public void setGraphics(GuiGraphicsExtractor graphics) {
 		this.graphics = graphics;
 	}
 	

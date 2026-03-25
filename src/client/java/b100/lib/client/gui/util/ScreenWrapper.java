@@ -1,11 +1,13 @@
 package b100.lib.client.gui.util;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.GuiGraphics;
+import b100.lib.client.gui.screen.GuiScreen;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.CharacterEvent;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
-import b100.lib.client.gui.screen.GuiScreen;
 
 public class ScreenWrapper extends Screen {
 
@@ -28,8 +30,8 @@ public class ScreenWrapper extends Screen {
 	}
 	
 	@Override
-	public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-		super.render(graphics, mouseX, mouseY, delta);
+	public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+		super.extractRenderState(graphics, mouseX, mouseY, a);
 		
 		utils.setGraphics(graphics);
 		utils.setFont(font);
@@ -52,31 +54,28 @@ public class ScreenWrapper extends Screen {
 			screenOpened = false;
 			screen.onScreenOpened();
 		}
-
-		RenderSystem.enableBlend();
-		RenderSystem.disableDepthTest();
 		
 		screen.draw();
 	}
 	
 	@Override
-	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-		return screen.keyEvent(keyCode, scanCode, modifiers, true);
+	public boolean keyPressed(KeyEvent event) {
+		return screen.keyEvent(event.key(), event.scancode(), event.modifiers(), true);
 	}
 	
 	@Override
-	public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
-		return screen.keyEvent(keyCode, scanCode, modifiers, false);
+	public boolean keyReleased(KeyEvent event) {
+		return screen.keyEvent(event.key(), event.scancode(), event.modifiers(), false);
 	}
 	
 	@Override
-	public boolean mouseClicked(double mouseX, double mouseY, int button) {
-		return screen.mouseEvent(button, true, mouseX, mouseY);
+	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+		return screen.mouseEvent(event.button(), true, event.x(), event.y());
 	}
 	
 	@Override
-	public boolean mouseReleased(double mouseX, double mouseY, int button) {
-		return screen.mouseEvent(button, false, mouseX, mouseY);
+	public boolean mouseReleased(MouseButtonEvent event) {
+		return screen.mouseEvent(event.button(), false, event.x(), event.y());
 	}
 	
 	@Override
@@ -85,8 +84,8 @@ public class ScreenWrapper extends Screen {
 	}
 	
 	@Override
-	public boolean charTyped(char chr, int modifiers) {
-		screen.charEvent(chr, modifiers);
+	public boolean charTyped(CharacterEvent event) {
+		screen.charEvent((char) event.codepoint(), 0);
 		return false;
 	}
 	
@@ -110,7 +109,7 @@ public class ScreenWrapper extends Screen {
 	}
 	
 	@Override
-	public void renderBackground(GuiGraphics context, int mouseX, int mouseY, float delta) {
+	public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
 		if(enableBackground || minecraft.level == null) {
 			boolean scissor = false;
 			if(enableBackgroundScissor && minecraft.level != null) {
@@ -118,7 +117,7 @@ public class ScreenWrapper extends Screen {
 				scissor = true;
 			}
 			
-			super.renderBackground(context, mouseX, mouseY, delta);
+			super.extractBackground(graphics, mouseX, mouseY, a);
 			
 			if(scissor) {
 				utils.disableScissor();
