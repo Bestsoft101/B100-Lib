@@ -39,7 +39,7 @@ public abstract class GuiScrollListScreen extends GuiScreen {
 	public void draw() {
 		super.draw();
 		if(title != null) {
-			utils.drawCenteredString(title, width / 2, headerSize / 2 - 4, 0xFFFFFFFF, true);
+			utils.drawCenteredText(title, width / 2, headerSize / 2 - 4, 0xFFFFFFFF, true);
 		}
 	}
 	

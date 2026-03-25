@@ -41,9 +41,9 @@ public class GuiScrollableList extends GuiContainer {
 		utils.drawTexture(textures.headerSeparator, posX, posY, 0, 0, this.width, separatorSize, 32, separatorSize);
 		utils.drawTexture(textures.footerSeparator, posX, posY + this.height - separatorSize, 0, 0, this.width, 2, 32, separatorSize);
 		
-		utils.drawContext.enableScissor(posX, posY + separatorSize, posX + width, posY + height - separatorSize);
+		utils.enableScissor(posX, posY + separatorSize, width, height - 2 * separatorSize);
 		super.draw();
-		utils.drawContext.disableScissor();
+		utils.disableScissor();
 	}
 	
 	@Override

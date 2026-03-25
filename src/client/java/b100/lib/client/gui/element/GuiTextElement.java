@@ -16,7 +16,7 @@ public class GuiTextElement extends GuiElement {
 	
 	@Override
 	public void draw() {
-		utils.drawCenteredString(text, posX + width / 2, posY + height / 2 - 4, color, shadow);
+		utils.drawCenteredText(text, posX + width / 2, posY + height / 2 - 4, color, shadow);
 	}
 	
 }

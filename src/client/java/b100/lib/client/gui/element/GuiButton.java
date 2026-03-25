@@ -60,13 +60,13 @@ public class GuiButton extends GuiElement implements Focusable {
 			texture = Textures.INSTANCE.buttonDisabled;
 		}
 		
-		utils.drawGuiTexture(texture, posX, posY, width, height);
+		utils.drawSprite(texture, posX, posY, width, height);
 		
 		if(text != null) {
-			int textWidth = utils.textRenderer.width(text);
+			int textWidth = utils.textWidth(text);
 			int textX = posX + (width - textWidth) / 2;
 			int textY = posY + height / 2 - 4;
-			utils.drawString(text, textX, textY, textColor, textShadow);
+			utils.drawText(text, textX, textY, textColor, textShadow);
 		}
 	}
 	

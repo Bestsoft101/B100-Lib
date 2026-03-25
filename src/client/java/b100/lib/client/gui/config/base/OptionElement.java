@@ -103,7 +103,7 @@ public abstract class OptionElement<T, E extends GuiElement> extends GuiContaine
 		
 		super.draw();
 		
-		utils.drawString(name, posX + 8, posY + height / 2 - 4, textColor, textShadow);
+		utils.drawText(name, posX + 8, posY + height / 2 - 4, textColor, textShadow);
 	}
 	
 	@Override

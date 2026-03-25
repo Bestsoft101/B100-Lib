@@ -28,11 +28,11 @@ public class ScreenWrapper extends Screen {
 	}
 	
 	@Override
-	public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
-		super.render(context, mouseX, mouseY, delta);
+	public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+		super.render(graphics, mouseX, mouseY, delta);
 		
-		utils.drawContext = context;
-		utils.textRenderer = font;
+		utils.setGraphics(graphics);
+		utils.setFont(font);
 		
 		screen.setWrapper(this);
 		
@@ -114,14 +114,14 @@ public class ScreenWrapper extends Screen {
 		if(enableBackground || minecraft.level == null) {
 			boolean scissor = false;
 			if(enableBackgroundScissor && minecraft.level != null) {
-				utils.drawContext.enableScissor(backgroundScissorX, backgroundScissorY, backgroundScissorX + backgroundScissorWidth, backgroundScissorY + backgroundScissorHeight);
+				utils.enableScissor(backgroundScissorX, backgroundScissorY, backgroundScissorWidth, backgroundScissorHeight);
 				scissor = true;
 			}
 			
 			super.renderBackground(context, mouseX, mouseY, delta);
 			
 			if(scissor) {
-				utils.drawContext.disableScissor();
+				utils.disableScissor();
 			}
 		}
 	}

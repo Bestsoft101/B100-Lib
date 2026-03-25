@@ -36,10 +36,10 @@ public class GuiListButton extends GuiElement implements Focusable {
 		}
 		
 		if(text != null) {
-			int textWidth = utils.textRenderer.width(text);
+			int textWidth = utils.textWidth(text);
 			int textX = posX + (width - textWidth) / 2;
 			int textY = posY + height / 2 - 4;
-			utils.drawString(text, textX, textY, 0xFFFFFF, true);
+			utils.drawText(text, textX, textY, 0xFFFFFF, true);
 		}
 	}
 	

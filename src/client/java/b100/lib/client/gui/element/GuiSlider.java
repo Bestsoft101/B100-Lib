@@ -96,14 +96,14 @@ public abstract class GuiSlider<T> extends GuiElement implements Focusable {
 			handleTexture = Textures.INSTANCE.sliderHandle;
 		}
 		
-		utils.drawGuiTexture(backgroundTexture, posX, posY, width, height);
+		utils.drawSprite(backgroundTexture, posX, posY, width, height);
 		
 		float floatValue = getSliderValueAsFloat(value);
 		
 		int handlePos = posX + (int) (floatValue * (width - HANDLE_WIDTH));
-		utils.drawGuiTexture(handleTexture, handlePos, posY, HANDLE_WIDTH, height);
+		utils.drawSprite(handleTexture, handlePos, posY, HANDLE_WIDTH, height);
 		
-		utils.drawCenteredString(getText(value), posX + width / 2, posY + height / 2 - 4, textColor, textShadow);
+		utils.drawCenteredText(getText(value), posX + width / 2, posY + height / 2 - 4, textColor, textShadow);
 	}
 	
 	@Override

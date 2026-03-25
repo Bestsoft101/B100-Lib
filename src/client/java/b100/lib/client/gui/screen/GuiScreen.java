@@ -102,7 +102,7 @@ public abstract class GuiScreen extends GuiContainer implements IScreen, FocusLi
 	}
 	
 	public void drawWrappedTooltip(Component tooltip, int width) {
-		wrapper.setTooltipForNextRenderPass(utils.textRenderer.split(tooltip, width));
+		wrapper.setTooltipForNextRenderPass(utils.wrap(tooltip, width));
 	}
 	
 	public boolean focusNextElement(FocusDirection direction) {

@@ -48,8 +48,8 @@ public class GuiScrollBar extends GuiElement {
 		float scrollFactor = (float) (list.getScrollAmount() / list.getMaxScrollAmount());
 		int scrollerOffset = (int) (scrollFactor * (height - scrollerHeight));
 		
-		utils.drawGuiTexture(Textures.INSTANCE.scrollerBackground, posX, posY, width, height);
-		utils.drawGuiTexture(Textures.INSTANCE.scroller, posX, posY + scrollerOffset, width, scrollerHeight);
+		utils.drawSprite(Textures.INSTANCE.scrollerBackground, posX, posY, width, height);
+		utils.drawSprite(Textures.INSTANCE.scroller, posX, posY + scrollerOffset, width, scrollerHeight);
 	}
 	
 	@Override
