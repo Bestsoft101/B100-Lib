@@ -35,18 +35,18 @@ public class GuiUtils {
 	public void setScreen(IScreen screen) {
 		Minecraft minecraft = Minecraft.getInstance();
 		
-		if(minecraft.screen instanceof ScreenWrapper screenWrapper) {
+		if(minecraft.gui.screen() instanceof ScreenWrapper screenWrapper) {
 			screenWrapper.screen.onClose();
 		}
 		
 		if(screen instanceof GuiScreen) {
 			GuiScreen screen1 = (GuiScreen) screen;
-			minecraft.setScreen(new ScreenWrapper(screen1));	
+			minecraft.setScreenAndShow(new ScreenWrapper(screen1));
 		}else if(screen instanceof Screen) {
 			Screen screen1 = (Screen) screen;
-			minecraft.setScreen(screen1);
+			minecraft.setScreenAndShow(screen1);
 		}else if(screen == null) {
-			minecraft.setScreen(null);
+			minecraft.setScreenAndShow(null);
 		}
 	}
 	
